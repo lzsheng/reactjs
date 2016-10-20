@@ -1,0 +1,13 @@
+@import '../../base/_fn';
+.topBar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: $topBarHeight;
+    line-height: $topBarHeight;
+    background-color: #f8f8f8;
+    text-align: center;
+    font-size: 16px;
+    @include setBottomLineAfter();
+}

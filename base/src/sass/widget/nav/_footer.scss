@@ -1,0 +1,28 @@
+@import '../../base/_fn';
+.footerNav{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: $footerNavHeight;
+    background-color: #f8f8f8;
+    ul{
+        display: flex;
+        height: 100%;
+        position: relative;
+        @include setTopLineAfter();
+        li{
+            flex: 1;
+            justify-content: center;
+            height: 100%;
+            display: flex;
+            position: relative;
+            @include setRightLineAfter();
+            a{
+                justify-content: center;
+                height: 100%;
+                line-height: $footerNavHeight;
+            }
+        }
+    }
+}
