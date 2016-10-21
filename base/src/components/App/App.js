@@ -5,7 +5,7 @@ import NavLink from '../NavLink';
 
 const App = (props) => (
   <setion>
-  <nav className="topBar">我是页头</nav>
+  {/* <nav className="topBar">我是页头</nav> */}
   <footer className="footerNav">
     <ul>
       <li><IndexLink to="/" activeClassName="active">Home</IndexLink></li>

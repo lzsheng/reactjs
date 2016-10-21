@@ -17,4 +17,31 @@
             }
         }
     }
+    .addBtn{
+        display: block;
+        margin:0 auto;
+        height: 34px;
+        line-height: 34px;
+        font-size: 16px;
+        background: dodgerblue;
+        color: white;
+        text-align: center;
+    }
+    .list{
+        display: flex;
+        flex-direction: column;
+        li{
+            position: relative;
+            padding:8px;
+            @include setBottomLineAfter();
+            &:hover .deleteItem{
+                color:mediumvioletred;
+            }
+            .deleteItem{
+                float:right;
+                text-decoration: underline;
+            }
+        }
+    }
+    
 }
