@@ -1,0 +1,25 @@
+@import '../base/_fn';
+.about{
+  img{
+    display: block;
+    width: 40%;
+    margin: 10px auto;
+    transform: skewX(0deg);
+    transition: all 2s;
+    animation:githubRun 4s ease-in-out;
+  }
+  h3{
+    text-align: center;
+  }
+}
+@keyframes githubRun{
+  0%,100%{
+    transform: skewX(0deg);
+  }
+  35%{
+    transform: skewX(15deg);
+  }
+  65%{
+    transform: skewX(-15deg);
+  }
+}
