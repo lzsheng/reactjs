@@ -13,13 +13,16 @@ class List extends Component {
       console.log(e,index);
       this.props._Del(index);
   }
+  _toContactsDetail(e,name,age,tel){
+      window.location.hash = `/ContactsDetail/${name}/${age}/${tel}`;
+  }
   render(){
     return (
         <ul className="list">
             {
                 this.props.data.map((item,index)=>{
                     return (
-                    <li key={index}>{index+1}. 姓名:{item.name} 年龄:{item.age} 电话:{item.tel} <span className="deleteItem" onClick={ e=>(this._delItem(e,index)) }>删除</span></li>
+                    <li key={index}>{index+1}. 姓名:{item.name} 年龄:{item.age} 电话:{item.tel}<span className="detailItem" onClick={ e=>(this._toContactsDetail(e,item.name,item.age,item.tel)) }>详情</span>  <span className="deleteItem" onClick={ e=>(this._delItem(e,index)) }>删除</span></li>
                     )
                 })
             }

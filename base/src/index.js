@@ -7,6 +7,7 @@ import Repos from './components/Repos';
 import About from './components/About';
 import User from './components/User';
 import Contacts from './components/Contacts';
+import ContactsDetail from './components/Contacts/ContactsDetail';
 
 ReactDOM.render(
   <Router history={hashHistory}>
@@ -15,6 +16,7 @@ ReactDOM.render(
       <Route path="/repos/:name" component={Repos} />
       <Route path="/user" component={User} />
       <Route path="/contacts" component={Contacts} />
+      <Route path="ContactsDetail/:name/:age/:tel" component={ContactsDetail} />
       <Route path="/about" component={About} />
     </Route>
   </Router>,

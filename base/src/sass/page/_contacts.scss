@@ -38,6 +38,17 @@
                 color:mediumvioletred;
             }
             .deleteItem{
+                color: red;
+                margin-right: 3px;
+                float:right;
+                text-decoration: underline;
+            }
+            &:hover .detailItem{
+                color:darkblue;
+            }
+            .detailItem{
+                color: blueviolet;
+                margin-right: 3px;
                 float:right;
                 text-decoration: underline;
             }
