@@ -65,9 +65,9 @@ class Contacts extends Component {
     return (
       <div className="contacts">
         <ul className="formList">
-          <li className="item"><label>姓名:<input id="name" type="text" onChange={e=>this._change(e)} value={this.state.entry.name}/></label></li>
-          <li className="item"><label>年龄:<input id="age" type="tel" onChange={e=>this._change(e)} value={this.state.entry.age}/></label></li>
-          <li className="item"><label>电话:<input id="tel" type="tel" onChange={e=>this._change(e)} value={this.state.entry.tel} maxLength="11"/></label></li>
+          <li className="item"><label>姓名:<input id="name" type="text" className="coolInput" onChange={e=>this._change(e)} value={this.state.entry.name}/></label></li>
+          <li className="item"><label>年龄:<input id="age" type="tel" className="coolInput" onChange={e=>this._change(e)} value={this.state.entry.age}/></label></li>
+          <li className="item"><label>电话:<input id="tel" type="tel" className="coolInput" onChange={e=>this._change(e)} value={this.state.entry.tel} maxLength="11"/></label></li>
         </ul>
         <a className="addBtn" onClick={e=>this._add(e)}>新增</a>
         <List data={this.state.history} _Del={this._Del.bind(this)}/>

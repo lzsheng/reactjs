@@ -15,7 +15,8 @@ class List extends Component {
       this.props._Del(index);
   }
   _toContactsDetail(e,name,age,tel){
-      window.location.hash = `/ContactsDetail/${name}/${age}/${tel}`;
+      let myName = encodeURI(name);
+      window.location.hash = `/ContactsDetail/${myName}/${age}/${tel}`;
   }
   render(){
     return (

@@ -1,28 +1,25 @@
 import React from 'react';
 import { Link, IndexLink } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-import styles from './appStyles';
-import NavLink from '../NavLink';
 
-let classname = "example";
+let routerTransitionClassname = "example";
 const App = (props) => {
   return (
   <setion>
   {/* <nav className="topBar">我是页头</nav> */}
   <footer className="footerNav">
     <ul>
-      <li><IndexLink to="/" activeClassName="active">Home</IndexLink></li>
-      <li><Link to="/repos/myPar" activeStyle={styles.active}>Repos</Link></li>
-      <li><Link to="/user" activeClassName="active">User</Link></li>
-      <li><NavLink to="/contacts">Contacts</NavLink></li>
-      <li><Link to="/about" activeStyle={{ color: 'green' }}>About</Link></li>
+      <li><IndexLink to="/" activeClassName="navActive">Home</IndexLink></li>
+      <li><Link to="/repos/myPar" activeClassName="navActive">Repos</Link></li>
+      <li><Link to="/contacts" activeClassName="navActive">Contacts</Link></li>
+      <li><Link to="/about" activeClassName="navActive">About</Link></li>
     </ul>
   </footer>
   
   <ReactCSSTransitionGroup
       component="div"
       className="content"
-      transitionName={classname}
+      transitionName={routerTransitionClassname}
       transitionEnterTimeout={1000}
       transitionLeaveTimeout={1000}
   >

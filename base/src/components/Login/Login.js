@@ -31,10 +31,13 @@ class Login extends Component {
   }
   render() {
     return (
-      <form onSubmit={ (e)=>(this.handleSubmit(e)) }>
-        <h3>用户名:</h3><input ref="userName" type="text" placeholder="请键入用户名" defaultValue="lzsheng"/>
-        <h3>密 码:<small>(123456)</small></h3><input ref="passWord" type="password" placeholder="请键入密码" defaultValue="123456"/>
-        <button type="submit">login</button>
+      <form className="login" onSubmit={ (e)=>(this.handleSubmit(e)) }>
+        <h2>Login</h2>
+        <div>User Name</div>
+        <div><input ref="userName" type="text" className="coolInput" placeholder="请键入用户名" defaultValue="lzsheng"/></div>
+        <div>Pass Word</div>
+        <div><input ref="passWord" type="password" className="coolInput" placeholder="请键入密码:123456"/></div>
+        <div><button type="submit">login</button></div>
         {this.state.error && (
           <p>错了错了,账号是:lzsheng,密码123456</p>
         )}

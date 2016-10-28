@@ -22,7 +22,11 @@
                 justify-content: center;
                 height: 100%;
                 line-height: $footerNavHeight;
+                color:#333;
             }
         }
+    }
+    .navActive{
+        text-decoration: underline;
     }
 }

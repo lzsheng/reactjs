@@ -1,5 +1,6 @@
 @import '../base/_fn';
 .about{
+  margin-top: 70px;
   img{
     display: block;
     width: 40%;
@@ -10,6 +11,26 @@
   }
   h3{
     text-align: center;
+    color: #969696;
+    text-decoration: underline;
+  }
+  .logoutBtn{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    &>span{
+      border: 1px inset #e8e8e8;
+      padding: 5px 30px;
+      border-radius: 3px;
+      background-color: #f8f8f8;
+      color: #000;
+      outline: none;
+      transition:all 0.3s;
+      &:active{
+        border-color: #666;
+        padding:5px 36px;;
+      }
+    }
   }
 }
 @keyframes githubRun{

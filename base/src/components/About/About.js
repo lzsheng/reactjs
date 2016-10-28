@@ -36,9 +36,9 @@ class About extends Component {
     render() {
         return (
           <div className="about">
-            <img src={this.state.avatarUrl} />
+            <img src={'../../../img/8055289.png'} />
             <a href={this.state.githubtUrl}><h3>{this.state.login} Github Link</h3></a>
-            <div onClick={e=>(this._logout(e))}>模拟注销</div>
+            <div className="logoutBtn" onClick={e=>(this._logout(e))}><span>模拟注销</span></div>
           </div>
         );
     }
