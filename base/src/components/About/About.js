@@ -1,14 +1,24 @@
 import React, {Component} from 'react';
+import { withRouter } from 'react-router';
 import $ from 'jquery';
+import auth from '../../Until/auth';
 
 class About extends Component {
     constructor(props) {
         super(props);
+        console.log("About",props);
         this.state = {
           login: '',
           githubtUrl: '',
           avatarUrl: '',
         }
+    }
+    _logout(e){
+        console.log("点击了'模拟注销'按钮");
+        let cb = () =>{
+            this.props.router.replace("/");
+        }
+        auth.logout(cb);
     }
     componentDidMount() {
         $.get(this.props.source||'https://api.github.com/users/lzsheng', (result) => {
@@ -28,9 +38,10 @@ class About extends Component {
           <div className="about">
             <img src={this.state.avatarUrl} />
             <a href={this.state.githubtUrl}><h3>{this.state.login} Github Link</h3></a>
+            <div onClick={e=>(this._logout(e))}>模拟注销</div>
           </div>
         );
     }
 }
 
-export default About;
+export default withRouter(About);
