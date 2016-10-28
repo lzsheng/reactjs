@@ -67,27 +67,53 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _Home = __webpack_require__(241);
+	var _Login = __webpack_require__(248);
+
+	var _Login2 = _interopRequireDefault(_Login);
+
+	var _Home = __webpack_require__(251);
 
 	var _Home2 = _interopRequireDefault(_Home);
 
-	var _Repos = __webpack_require__(243);
+	var _Repos = __webpack_require__(253);
 
 	var _Repos2 = _interopRequireDefault(_Repos);
 
-	var _About = __webpack_require__(245);
+	var _Repo = __webpack_require__(255);
+
+	var _Repo2 = _interopRequireDefault(_Repo);
+
+	var _About = __webpack_require__(256);
 
 	var _About2 = _interopRequireDefault(_About);
 
-	var _User = __webpack_require__(248);
+	var _User = __webpack_require__(259);
 
 	var _User2 = _interopRequireDefault(_User);
 
-	var _Contacts = __webpack_require__(250);
+	var _Contacts = __webpack_require__(261);
 
 	var _Contacts2 = _interopRequireDefault(_Contacts);
 
+	var _ContactsDetail = __webpack_require__(267);
+
+	var _ContactsDetail2 = _interopRequireDefault(_ContactsDetail);
+
+	var _auth = __webpack_require__(250);
+
+	var _auth2 = _interopRequireDefault(_auth);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var redirectToLogin = function redirectToLogin(nextState, replaceState) {
+	  console.log("redirectToLogin", nextState.location);
+	  if (!_auth2.default.loggedIn()) {
+	    replaceState({
+	      pathname: '/login',
+	      state: { nextPathname: nextState.location.pathname } //告诉login页面,登录成功后跳转到哪个页面
+	    });
+	  }
+	};
 
 	_reactDom2.default.render(_react2.default.createElement(
 	  _reactRouter.Router,
@@ -96,15 +122,21 @@
 	    _reactRouter.Route,
 	    { path: '/', component: _App2.default },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/repos/:name', component: _Repos2.default }),
+	    _react2.default.createElement(
+	      _reactRouter.Route,
+	      { path: '/repos', component: _Repos2.default },
+	      _react2.default.createElement(_reactRouter.Route, { path: '/repos/:name', component: _Repo2.default })
+	    ),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/user', component: _User2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/contacts', component: _Contacts2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/about', component: _About2.default })
+	    _react2.default.createElement(_reactRouter.Route, { path: '/ContactsDetail/:name/:age/:tel', component: _ContactsDetail2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/about', component: _About2.default, onEnter: redirectToLogin }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _Login2.default })
 	  )
 	), document.getElementById('app'));
 
-	__webpack_require__(256);
-	__webpack_require__(260);
+	__webpack_require__(268);
+	__webpack_require__(272);
 
 /***/ },
 /* 2 */
@@ -27162,16 +27194,21 @@
 
 	var _reactRouter = __webpack_require__(173);
 
-	var _appStyles = __webpack_require__(238);
+	var _reactAddonsCssTransitionGroup = __webpack_require__(238);
+
+	var _reactAddonsCssTransitionGroup2 = _interopRequireDefault(_reactAddonsCssTransitionGroup);
+
+	var _appStyles = __webpack_require__(245);
 
 	var _appStyles2 = _interopRequireDefault(_appStyles);
 
-	var _NavLink = __webpack_require__(239);
+	var _NavLink = __webpack_require__(246);
 
 	var _NavLink2 = _interopRequireDefault(_NavLink);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var classname = "example";
 	var App = function App(props) {
 	  return _react2.default.createElement(
 	    'setion',
@@ -27196,7 +27233,7 @@
 	          null,
 	          _react2.default.createElement(
 	            _reactRouter.Link,
-	            { to: '/repos/react-router', activeStyle: _appStyles2.default.active },
+	            { to: '/repos/myPar', activeStyle: _appStyles2.default.active },
 	            'Repos'
 	          )
 	        ),
@@ -27230,9 +27267,19 @@
 	      )
 	    ),
 	    _react2.default.createElement(
-	      'div',
-	      { className: 'content' },
-	      props.children
+	      _reactAddonsCssTransitionGroup2.default,
+	      {
+	        component: 'div',
+	        className: 'content',
+	        transitionName: classname,
+	        transitionEnterTimeout: 1000,
+	        transitionLeaveTimeout: 1000
+	      },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'routerContent', key: props.location.pathname },
+	        props.children
+	      )
 	    )
 	  );
 	};
@@ -27245,6 +27292,842 @@
 
 /***/ },
 /* 238 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(239);
+
+/***/ },
+/* 239 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactCSSTransitionGroup
+	 */
+
+	'use strict';
+
+	var _assign = __webpack_require__(5);
+
+	var React = __webpack_require__(3);
+
+	var ReactTransitionGroup = __webpack_require__(240);
+	var ReactCSSTransitionGroupChild = __webpack_require__(242);
+
+	function createTransitionTimeoutPropValidator(transitionType) {
+	  var timeoutPropName = 'transition' + transitionType + 'Timeout';
+	  var enabledPropName = 'transition' + transitionType;
+
+	  return function (props) {
+	    // If the transition is enabled
+	    if (props[enabledPropName]) {
+	      // If no timeout duration is provided
+	      if (props[timeoutPropName] == null) {
+	        return new Error(timeoutPropName + ' wasn\'t supplied to ReactCSSTransitionGroup: ' + 'this can cause unreliable animations and won\'t be supported in ' + 'a future version of React. See ' + 'https://fb.me/react-animation-transition-group-timeout for more ' + 'information.');
+
+	        // If the duration isn't a number
+	      } else if (typeof props[timeoutPropName] !== 'number') {
+	          return new Error(timeoutPropName + ' must be a number (in milliseconds)');
+	        }
+	    }
+	  };
+	}
+
+	/**
+	 * An easy way to perform CSS transitions and animations when a React component
+	 * enters or leaves the DOM.
+	 * See https://facebook.github.io/react/docs/animation.html#high-level-api-reactcsstransitiongroup
+	 */
+	var ReactCSSTransitionGroup = React.createClass({
+	  displayName: 'ReactCSSTransitionGroup',
+
+	  propTypes: {
+	    transitionName: ReactCSSTransitionGroupChild.propTypes.name,
+
+	    transitionAppear: React.PropTypes.bool,
+	    transitionEnter: React.PropTypes.bool,
+	    transitionLeave: React.PropTypes.bool,
+	    transitionAppearTimeout: createTransitionTimeoutPropValidator('Appear'),
+	    transitionEnterTimeout: createTransitionTimeoutPropValidator('Enter'),
+	    transitionLeaveTimeout: createTransitionTimeoutPropValidator('Leave')
+	  },
+
+	  getDefaultProps: function () {
+	    return {
+	      transitionAppear: false,
+	      transitionEnter: true,
+	      transitionLeave: true
+	    };
+	  },
+
+	  _wrapChild: function (child) {
+	    // We need to provide this childFactory so that
+	    // ReactCSSTransitionGroupChild can receive updates to name, enter, and
+	    // leave while it is leaving.
+	    return React.createElement(ReactCSSTransitionGroupChild, {
+	      name: this.props.transitionName,
+	      appear: this.props.transitionAppear,
+	      enter: this.props.transitionEnter,
+	      leave: this.props.transitionLeave,
+	      appearTimeout: this.props.transitionAppearTimeout,
+	      enterTimeout: this.props.transitionEnterTimeout,
+	      leaveTimeout: this.props.transitionLeaveTimeout
+	    }, child);
+	  },
+
+	  render: function () {
+	    return React.createElement(ReactTransitionGroup, _assign({}, this.props, { childFactory: this._wrapChild }));
+	  }
+	});
+
+	module.exports = ReactCSSTransitionGroup;
+
+/***/ },
+/* 240 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactTransitionGroup
+	 */
+
+	'use strict';
+
+	var _assign = __webpack_require__(5);
+
+	var React = __webpack_require__(3);
+	var ReactInstanceMap = __webpack_require__(120);
+	var ReactTransitionChildMapping = __webpack_require__(241);
+
+	var emptyFunction = __webpack_require__(13);
+
+	/**
+	 * A basis for animations. When children are declaratively added or removed,
+	 * special lifecycle hooks are called.
+	 * See https://facebook.github.io/react/docs/animation.html#low-level-api-reacttransitiongroup
+	 */
+	var ReactTransitionGroup = React.createClass({
+	  displayName: 'ReactTransitionGroup',
+
+	  propTypes: {
+	    component: React.PropTypes.any,
+	    childFactory: React.PropTypes.func
+	  },
+
+	  getDefaultProps: function () {
+	    return {
+	      component: 'span',
+	      childFactory: emptyFunction.thatReturnsArgument
+	    };
+	  },
+
+	  getInitialState: function () {
+	    return {
+	      // TODO: can we get useful debug information to show at this point?
+	      children: ReactTransitionChildMapping.getChildMapping(this.props.children)
+	    };
+	  },
+
+	  componentWillMount: function () {
+	    this.currentlyTransitioningKeys = {};
+	    this.keysToEnter = [];
+	    this.keysToLeave = [];
+	  },
+
+	  componentDidMount: function () {
+	    var initialChildMapping = this.state.children;
+	    for (var key in initialChildMapping) {
+	      if (initialChildMapping[key]) {
+	        this.performAppear(key);
+	      }
+	    }
+	  },
+
+	  componentWillReceiveProps: function (nextProps) {
+	    var nextChildMapping;
+	    if (process.env.NODE_ENV !== 'production') {
+	      nextChildMapping = ReactTransitionChildMapping.getChildMapping(nextProps.children, ReactInstanceMap.get(this)._debugID);
+	    } else {
+	      nextChildMapping = ReactTransitionChildMapping.getChildMapping(nextProps.children);
+	    }
+	    var prevChildMapping = this.state.children;
+
+	    this.setState({
+	      children: ReactTransitionChildMapping.mergeChildMappings(prevChildMapping, nextChildMapping)
+	    });
+
+	    var key;
+
+	    for (key in nextChildMapping) {
+	      var hasPrev = prevChildMapping && prevChildMapping.hasOwnProperty(key);
+	      if (nextChildMapping[key] && !hasPrev && !this.currentlyTransitioningKeys[key]) {
+	        this.keysToEnter.push(key);
+	      }
+	    }
+
+	    for (key in prevChildMapping) {
+	      var hasNext = nextChildMapping && nextChildMapping.hasOwnProperty(key);
+	      if (prevChildMapping[key] && !hasNext && !this.currentlyTransitioningKeys[key]) {
+	        this.keysToLeave.push(key);
+	      }
+	    }
+
+	    // If we want to someday check for reordering, we could do it here.
+	  },
+
+	  componentDidUpdate: function () {
+	    var keysToEnter = this.keysToEnter;
+	    this.keysToEnter = [];
+	    keysToEnter.forEach(this.performEnter);
+
+	    var keysToLeave = this.keysToLeave;
+	    this.keysToLeave = [];
+	    keysToLeave.forEach(this.performLeave);
+	  },
+
+	  performAppear: function (key) {
+	    this.currentlyTransitioningKeys[key] = true;
+
+	    var component = this.refs[key];
+
+	    if (component.componentWillAppear) {
+	      component.componentWillAppear(this._handleDoneAppearing.bind(this, key));
+	    } else {
+	      this._handleDoneAppearing(key);
+	    }
+	  },
+
+	  _handleDoneAppearing: function (key) {
+	    var component = this.refs[key];
+	    if (component.componentDidAppear) {
+	      component.componentDidAppear();
+	    }
+
+	    delete this.currentlyTransitioningKeys[key];
+
+	    var currentChildMapping;
+	    if (process.env.NODE_ENV !== 'production') {
+	      currentChildMapping = ReactTransitionChildMapping.getChildMapping(this.props.children, ReactInstanceMap.get(this)._debugID);
+	    } else {
+	      currentChildMapping = ReactTransitionChildMapping.getChildMapping(this.props.children);
+	    }
+
+	    if (!currentChildMapping || !currentChildMapping.hasOwnProperty(key)) {
+	      // This was removed before it had fully appeared. Remove it.
+	      this.performLeave(key);
+	    }
+	  },
+
+	  performEnter: function (key) {
+	    this.currentlyTransitioningKeys[key] = true;
+
+	    var component = this.refs[key];
+
+	    if (component.componentWillEnter) {
+	      component.componentWillEnter(this._handleDoneEntering.bind(this, key));
+	    } else {
+	      this._handleDoneEntering(key);
+	    }
+	  },
+
+	  _handleDoneEntering: function (key) {
+	    var component = this.refs[key];
+	    if (component.componentDidEnter) {
+	      component.componentDidEnter();
+	    }
+
+	    delete this.currentlyTransitioningKeys[key];
+
+	    var currentChildMapping;
+	    if (process.env.NODE_ENV !== 'production') {
+	      currentChildMapping = ReactTransitionChildMapping.getChildMapping(this.props.children, ReactInstanceMap.get(this)._debugID);
+	    } else {
+	      currentChildMapping = ReactTransitionChildMapping.getChildMapping(this.props.children);
+	    }
+
+	    if (!currentChildMapping || !currentChildMapping.hasOwnProperty(key)) {
+	      // This was removed before it had fully entered. Remove it.
+	      this.performLeave(key);
+	    }
+	  },
+
+	  performLeave: function (key) {
+	    this.currentlyTransitioningKeys[key] = true;
+
+	    var component = this.refs[key];
+	    if (component.componentWillLeave) {
+	      component.componentWillLeave(this._handleDoneLeaving.bind(this, key));
+	    } else {
+	      // Note that this is somewhat dangerous b/c it calls setState()
+	      // again, effectively mutating the component before all the work
+	      // is done.
+	      this._handleDoneLeaving(key);
+	    }
+	  },
+
+	  _handleDoneLeaving: function (key) {
+	    var component = this.refs[key];
+
+	    if (component.componentDidLeave) {
+	      component.componentDidLeave();
+	    }
+
+	    delete this.currentlyTransitioningKeys[key];
+
+	    var currentChildMapping;
+	    if (process.env.NODE_ENV !== 'production') {
+	      currentChildMapping = ReactTransitionChildMapping.getChildMapping(this.props.children, ReactInstanceMap.get(this)._debugID);
+	    } else {
+	      currentChildMapping = ReactTransitionChildMapping.getChildMapping(this.props.children);
+	    }
+
+	    if (currentChildMapping && currentChildMapping.hasOwnProperty(key)) {
+	      // This entered again before it fully left. Add it again.
+	      this.performEnter(key);
+	    } else {
+	      this.setState(function (state) {
+	        var newChildren = _assign({}, state.children);
+	        delete newChildren[key];
+	        return { children: newChildren };
+	      });
+	    }
+	  },
+
+	  render: function () {
+	    // TODO: we could get rid of the need for the wrapper node
+	    // by cloning a single child
+	    var childrenToRender = [];
+	    for (var key in this.state.children) {
+	      var child = this.state.children[key];
+	      if (child) {
+	        // You may need to apply reactive updates to a child as it is leaving.
+	        // The normal React way to do it won't work since the child will have
+	        // already been removed. In case you need this behavior you can provide
+	        // a childFactory function to wrap every child, even the ones that are
+	        // leaving.
+	        childrenToRender.push(React.cloneElement(this.props.childFactory(child), { ref: key, key: key }));
+	      }
+	    }
+
+	    // Do not forward ReactTransitionGroup props to primitive DOM nodes
+	    var props = _assign({}, this.props);
+	    delete props.transitionLeave;
+	    delete props.transitionName;
+	    delete props.transitionAppear;
+	    delete props.transitionEnter;
+	    delete props.childFactory;
+	    delete props.transitionLeaveTimeout;
+	    delete props.transitionEnterTimeout;
+	    delete props.transitionAppearTimeout;
+	    delete props.component;
+
+	    return React.createElement(this.props.component, props, childrenToRender);
+	  }
+	});
+
+	module.exports = ReactTransitionGroup;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ },
+/* 241 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactTransitionChildMapping
+	 */
+
+	'use strict';
+
+	var flattenChildren = __webpack_require__(129);
+
+	var ReactTransitionChildMapping = {
+	  /**
+	   * Given `this.props.children`, return an object mapping key to child. Just
+	   * simple syntactic sugar around flattenChildren().
+	   *
+	   * @param {*} children `this.props.children`
+	   * @param {number=} selfDebugID Optional debugID of the current internal instance.
+	   * @return {object} Mapping of key to child
+	   */
+	  getChildMapping: function (children, selfDebugID) {
+	    if (!children) {
+	      return children;
+	    }
+
+	    if (process.env.NODE_ENV !== 'production') {
+	      return flattenChildren(children, selfDebugID);
+	    }
+
+	    return flattenChildren(children);
+	  },
+
+	  /**
+	   * When you're adding or removing children some may be added or removed in the
+	   * same render pass. We want to show *both* since we want to simultaneously
+	   * animate elements in and out. This function takes a previous set of keys
+	   * and a new set of keys and merges them with its best guess of the correct
+	   * ordering. In the future we may expose some of the utilities in
+	   * ReactMultiChild to make this easy, but for now React itself does not
+	   * directly have this concept of the union of prevChildren and nextChildren
+	   * so we implement it here.
+	   *
+	   * @param {object} prev prev children as returned from
+	   * `ReactTransitionChildMapping.getChildMapping()`.
+	   * @param {object} next next children as returned from
+	   * `ReactTransitionChildMapping.getChildMapping()`.
+	   * @return {object} a key set that contains all keys in `prev` and all keys
+	   * in `next` in a reasonable order.
+	   */
+	  mergeChildMappings: function (prev, next) {
+	    prev = prev || {};
+	    next = next || {};
+
+	    function getValueForKey(key) {
+	      if (next.hasOwnProperty(key)) {
+	        return next[key];
+	      } else {
+	        return prev[key];
+	      }
+	    }
+
+	    // For each key of `next`, the list of keys to insert before that key in
+	    // the combined list
+	    var nextKeysPending = {};
+
+	    var pendingKeys = [];
+	    for (var prevKey in prev) {
+	      if (next.hasOwnProperty(prevKey)) {
+	        if (pendingKeys.length) {
+	          nextKeysPending[prevKey] = pendingKeys;
+	          pendingKeys = [];
+	        }
+	      } else {
+	        pendingKeys.push(prevKey);
+	      }
+	    }
+
+	    var i;
+	    var childMapping = {};
+	    for (var nextKey in next) {
+	      if (nextKeysPending.hasOwnProperty(nextKey)) {
+	        for (i = 0; i < nextKeysPending[nextKey].length; i++) {
+	          var pendingNextKey = nextKeysPending[nextKey][i];
+	          childMapping[nextKeysPending[nextKey][i]] = getValueForKey(pendingNextKey);
+	        }
+	      }
+	      childMapping[nextKey] = getValueForKey(nextKey);
+	    }
+
+	    // Finally, add the keys which didn't appear before any key in `next`
+	    for (i = 0; i < pendingKeys.length; i++) {
+	      childMapping[pendingKeys[i]] = getValueForKey(pendingKeys[i]);
+	    }
+
+	    return childMapping;
+	  }
+	};
+
+	module.exports = ReactTransitionChildMapping;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ },
+/* 242 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactCSSTransitionGroupChild
+	 */
+
+	'use strict';
+
+	var React = __webpack_require__(3);
+	var ReactDOM = __webpack_require__(36);
+
+	var CSSCore = __webpack_require__(243);
+	var ReactTransitionEvents = __webpack_require__(244);
+
+	var onlyChild = __webpack_require__(34);
+
+	var TICK = 17;
+
+	var ReactCSSTransitionGroupChild = React.createClass({
+	  displayName: 'ReactCSSTransitionGroupChild',
+
+	  propTypes: {
+	    name: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.shape({
+	      enter: React.PropTypes.string,
+	      leave: React.PropTypes.string,
+	      active: React.PropTypes.string
+	    }), React.PropTypes.shape({
+	      enter: React.PropTypes.string,
+	      enterActive: React.PropTypes.string,
+	      leave: React.PropTypes.string,
+	      leaveActive: React.PropTypes.string,
+	      appear: React.PropTypes.string,
+	      appearActive: React.PropTypes.string
+	    })]).isRequired,
+
+	    // Once we require timeouts to be specified, we can remove the
+	    // boolean flags (appear etc.) and just accept a number
+	    // or a bool for the timeout flags (appearTimeout etc.)
+	    appear: React.PropTypes.bool,
+	    enter: React.PropTypes.bool,
+	    leave: React.PropTypes.bool,
+	    appearTimeout: React.PropTypes.number,
+	    enterTimeout: React.PropTypes.number,
+	    leaveTimeout: React.PropTypes.number
+	  },
+
+	  transition: function (animationType, finishCallback, userSpecifiedDelay) {
+	    var node = ReactDOM.findDOMNode(this);
+
+	    if (!node) {
+	      if (finishCallback) {
+	        finishCallback();
+	      }
+	      return;
+	    }
+
+	    var className = this.props.name[animationType] || this.props.name + '-' + animationType;
+	    var activeClassName = this.props.name[animationType + 'Active'] || className + '-active';
+	    var timeout = null;
+
+	    var endListener = function (e) {
+	      if (e && e.target !== node) {
+	        return;
+	      }
+
+	      clearTimeout(timeout);
+
+	      CSSCore.removeClass(node, className);
+	      CSSCore.removeClass(node, activeClassName);
+
+	      ReactTransitionEvents.removeEndEventListener(node, endListener);
+
+	      // Usually this optional callback is used for informing an owner of
+	      // a leave animation and telling it to remove the child.
+	      if (finishCallback) {
+	        finishCallback();
+	      }
+	    };
+
+	    CSSCore.addClass(node, className);
+
+	    // Need to do this to actually trigger a transition.
+	    this.queueClassAndNode(activeClassName, node);
+
+	    // If the user specified a timeout delay.
+	    if (userSpecifiedDelay) {
+	      // Clean-up the animation after the specified delay
+	      timeout = setTimeout(endListener, userSpecifiedDelay);
+	      this.transitionTimeouts.push(timeout);
+	    } else {
+	      // DEPRECATED: this listener will be removed in a future version of react
+	      ReactTransitionEvents.addEndEventListener(node, endListener);
+	    }
+	  },
+
+	  queueClassAndNode: function (className, node) {
+	    this.classNameAndNodeQueue.push({
+	      className: className,
+	      node: node
+	    });
+
+	    if (!this.timeout) {
+	      this.timeout = setTimeout(this.flushClassNameAndNodeQueue, TICK);
+	    }
+	  },
+
+	  flushClassNameAndNodeQueue: function () {
+	    if (this.isMounted()) {
+	      this.classNameAndNodeQueue.forEach(function (obj) {
+	        CSSCore.addClass(obj.node, obj.className);
+	      });
+	    }
+	    this.classNameAndNodeQueue.length = 0;
+	    this.timeout = null;
+	  },
+
+	  componentWillMount: function () {
+	    this.classNameAndNodeQueue = [];
+	    this.transitionTimeouts = [];
+	  },
+
+	  componentWillUnmount: function () {
+	    if (this.timeout) {
+	      clearTimeout(this.timeout);
+	    }
+	    this.transitionTimeouts.forEach(function (timeout) {
+	      clearTimeout(timeout);
+	    });
+
+	    this.classNameAndNodeQueue.length = 0;
+	  },
+
+	  componentWillAppear: function (done) {
+	    if (this.props.appear) {
+	      this.transition('appear', done, this.props.appearTimeout);
+	    } else {
+	      done();
+	    }
+	  },
+
+	  componentWillEnter: function (done) {
+	    if (this.props.enter) {
+	      this.transition('enter', done, this.props.enterTimeout);
+	    } else {
+	      done();
+	    }
+	  },
+
+	  componentWillLeave: function (done) {
+	    if (this.props.leave) {
+	      this.transition('leave', done, this.props.leaveTimeout);
+	    } else {
+	      done();
+	    }
+	  },
+
+	  render: function () {
+	    return onlyChild(this.props.children);
+	  }
+	});
+
+	module.exports = ReactCSSTransitionGroupChild;
+
+/***/ },
+/* 243 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @typechecks
+	 */
+
+	var invariant = __webpack_require__(9);
+
+	/**
+	 * The CSSCore module specifies the API (and implements most of the methods)
+	 * that should be used when dealing with the display of elements (via their
+	 * CSS classes and visibility on screen. It is an API focused on mutating the
+	 * display and not reading it as no logical state should be encoded in the
+	 * display of elements.
+	 */
+
+	/* Slow implementation for browsers that don't natively support .matches() */
+	function matchesSelector_SLOW(element, selector) {
+	  var root = element;
+	  while (root.parentNode) {
+	    root = root.parentNode;
+	  }
+
+	  var all = root.querySelectorAll(selector);
+	  return Array.prototype.indexOf.call(all, element) !== -1;
+	}
+
+	var CSSCore = {
+
+	  /**
+	   * Adds the class passed in to the element if it doesn't already have it.
+	   *
+	   * @param {DOMElement} element the element to set the class on
+	   * @param {string} className the CSS className
+	   * @return {DOMElement} the element passed in
+	   */
+	  addClass: function addClass(element, className) {
+	    !!/\s/.test(className) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'CSSCore.addClass takes only a single class name. "%s" contains ' + 'multiple classes.', className) : invariant(false) : void 0;
+
+	    if (className) {
+	      if (element.classList) {
+	        element.classList.add(className);
+	      } else if (!CSSCore.hasClass(element, className)) {
+	        element.className = element.className + ' ' + className;
+	      }
+	    }
+	    return element;
+	  },
+
+	  /**
+	   * Removes the class passed in from the element
+	   *
+	   * @param {DOMElement} element the element to set the class on
+	   * @param {string} className the CSS className
+	   * @return {DOMElement} the element passed in
+	   */
+	  removeClass: function removeClass(element, className) {
+	    !!/\s/.test(className) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'CSSCore.removeClass takes only a single class name. "%s" contains ' + 'multiple classes.', className) : invariant(false) : void 0;
+
+	    if (className) {
+	      if (element.classList) {
+	        element.classList.remove(className);
+	      } else if (CSSCore.hasClass(element, className)) {
+	        element.className = element.className.replace(new RegExp('(^|\\s)' + className + '(?:\\s|$)', 'g'), '$1').replace(/\s+/g, ' ') // multiple spaces to one
+	        .replace(/^\s*|\s*$/g, ''); // trim the ends
+	      }
+	    }
+	    return element;
+	  },
+
+	  /**
+	   * Helper to add or remove a class from an element based on a condition.
+	   *
+	   * @param {DOMElement} element the element to set the class on
+	   * @param {string} className the CSS className
+	   * @param {*} bool condition to whether to add or remove the class
+	   * @return {DOMElement} the element passed in
+	   */
+	  conditionClass: function conditionClass(element, className, bool) {
+	    return (bool ? CSSCore.addClass : CSSCore.removeClass)(element, className);
+	  },
+
+	  /**
+	   * Tests whether the element has the class specified.
+	   *
+	   * @param {DOMNode|DOMWindow} element the element to check the class on
+	   * @param {string} className the CSS className
+	   * @return {boolean} true if the element has the class, false if not
+	   */
+	  hasClass: function hasClass(element, className) {
+	    !!/\s/.test(className) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'CSS.hasClass takes only a single class name.') : invariant(false) : void 0;
+	    if (element.classList) {
+	      return !!className && element.classList.contains(className);
+	    }
+	    return (' ' + element.className + ' ').indexOf(' ' + className + ' ') > -1;
+	  },
+
+	  /**
+	   * Tests whether the element matches the selector specified
+	   *
+	   * @param {DOMNode|DOMWindow} element the element that we are querying
+	   * @param {string} selector the CSS selector
+	   * @return {boolean} true if the element matches the selector, false if not
+	   */
+	  matchesSelector: function matchesSelector(element, selector) {
+	    var matchesImpl = element.matches || element.webkitMatchesSelector || element.mozMatchesSelector || element.msMatchesSelector || function (s) {
+	      return matchesSelector_SLOW(element, s);
+	    };
+	    return matchesImpl.call(element, selector);
+	  }
+
+	};
+
+	module.exports = CSSCore;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ },
+/* 244 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactTransitionEvents
+	 */
+
+	'use strict';
+
+	var ExecutionEnvironment = __webpack_require__(50);
+
+	var getVendorPrefixedEventName = __webpack_require__(110);
+
+	var endEvents = [];
+
+	function detectEvents() {
+	  var animEnd = getVendorPrefixedEventName('animationend');
+	  var transEnd = getVendorPrefixedEventName('transitionend');
+
+	  if (animEnd) {
+	    endEvents.push(animEnd);
+	  }
+
+	  if (transEnd) {
+	    endEvents.push(transEnd);
+	  }
+	}
+
+	if (ExecutionEnvironment.canUseDOM) {
+	  detectEvents();
+	}
+
+	// We use the raw {add|remove}EventListener() call because EventListener
+	// does not know how to remove event listeners and we really should
+	// clean up. Also, these events are not triggered in older browsers
+	// so we should be A-OK here.
+
+	function addEventListener(node, eventName, eventListener) {
+	  node.addEventListener(eventName, eventListener, false);
+	}
+
+	function removeEventListener(node, eventName, eventListener) {
+	  node.removeEventListener(eventName, eventListener, false);
+	}
+
+	var ReactTransitionEvents = {
+	  addEndEventListener: function (node, eventListener) {
+	    if (endEvents.length === 0) {
+	      // If CSS transitions are not supported, trigger an "end animation"
+	      // event immediately.
+	      window.setTimeout(eventListener, 0);
+	      return;
+	    }
+	    endEvents.forEach(function (endEvent) {
+	      addEventListener(node, endEvent, eventListener);
+	    });
+	  },
+
+	  removeEndEventListener: function (node, eventListener) {
+	    if (endEvents.length === 0) {
+	      return;
+	    }
+	    endEvents.forEach(function (endEvent) {
+	      removeEventListener(node, endEvent, eventListener);
+	    });
+	  }
+	};
+
+	module.exports = ReactTransitionEvents;
+
+/***/ },
+/* 245 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -27259,7 +28142,7 @@
 	};
 
 /***/ },
-/* 239 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27268,7 +28151,7 @@
 	  value: true
 	});
 
-	var _NavLink = __webpack_require__(240);
+	var _NavLink = __webpack_require__(247);
 
 	Object.defineProperty(exports, 'default', {
 	  enumerable: true,
@@ -27280,7 +28163,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 240 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27306,7 +28189,7 @@
 	exports.default = NavLink;
 
 /***/ },
-/* 241 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27315,7 +28198,214 @@
 	  value: true
 	});
 
-	var _Home = __webpack_require__(242);
+	var _Login = __webpack_require__(249);
+
+	Object.defineProperty(exports, 'default', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_Login).default;
+	  }
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ },
+/* 249 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(173);
+
+	var _auth = __webpack_require__(250);
+
+	var _auth2 = _interopRequireDefault(_auth);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Login = function (_Component) {
+	  _inherits(Login, _Component);
+
+	  function Login(props) {
+	    _classCallCheck(this, Login);
+
+	    var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
+
+	    console.log("Login", props);
+	    _this.state = {};
+	    return _this;
+	  }
+
+	  _createClass(Login, [{
+	    key: 'handleSubmit',
+	    value: function handleSubmit(event) {
+	      var _this2 = this;
+
+	      event.preventDefault();
+
+	      var userName = this.refs.userName.value;
+	      var passWord = this.refs.passWord.value;
+
+	      _auth2.default.login(userName, passWord, function (loggedIn) {
+	        if (!loggedIn) {
+	          return _this2.setState({ error: true });
+	        }
+
+	        var location = _this2.props.location;
+
+	        //登录完成后,判断this.props.location.state.nextPathname,分发到相应的url
+
+	        if (location.state && location.state.nextPathname) {
+	          _this2.props.router.replace(location.state.nextPathname);
+	        } else {
+	          _this2.props.router.replace('/');
+	        }
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this3 = this;
+
+	      return _react2.default.createElement(
+	        'form',
+	        { onSubmit: function onSubmit(e) {
+	            return _this3.handleSubmit(e);
+	          } },
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          '\u7528\u6237\u540D:'
+	        ),
+	        _react2.default.createElement('input', { ref: 'userName', type: 'text', placeholder: '\u8BF7\u952E\u5165\u7528\u6237\u540D', defaultValue: 'lzsheng' }),
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          '\u5BC6 \u7801:',
+	          _react2.default.createElement(
+	            'small',
+	            null,
+	            '(123456)'
+	          )
+	        ),
+	        _react2.default.createElement('input', { ref: 'passWord', type: 'password', placeholder: '\u8BF7\u952E\u5165\u5BC6\u7801', defaultValue: '123456' }),
+	        _react2.default.createElement(
+	          'button',
+	          { type: 'submit' },
+	          'login'
+	        ),
+	        this.state.error && _react2.default.createElement(
+	          'p',
+	          null,
+	          '\u9519\u4E86\u9519\u4E86,\u8D26\u53F7\u662F:lzsheng,\u5BC6\u7801123456'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Login;
+	}(_react.Component);
+
+	//通过withRouter方法导出的模块,其props拥有router对象(react-router 2.x版本新增)
+	//https://github.com/ReactTraining/react-router/blob/master/upgrade-guides/v2.4.0.md
+
+
+	exports.default = (0, _reactRouter.withRouter)(Login);
+
+/***/ },
+/* 250 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	/**
+	 * 模拟登录状态
+	 */
+
+	exports.default = {
+	  login: function login(userName, pass, cb) {
+	    var _this = this;
+
+	    cb = arguments[arguments.length - 1];
+	    if (localStorage.token) {
+	      if (cb) cb(true);
+	      this.onChange(true);
+	      return;
+	    }
+	    pretendRequest(userName, pass, function (res) {
+	      if (res.authenticated) {
+	        localStorage.token = res.token;
+	        if (cb) cb(true);
+	        _this.onChange(true);
+	      } else {
+	        if (cb) cb(false);
+	        _this.onChange(false);
+	      }
+	    });
+	  },
+
+
+	  getToken: function getToken() {
+	    return localStorage.token;
+	  },
+
+	  logout: function logout(cb) {
+	    delete localStorage.token;
+	    if (cb) cb();
+	    this.onChange(false);
+	  },
+
+	  loggedIn: function loggedIn() {
+	    return !!localStorage.token;
+	  },
+
+	  onChange: function onChange() {}
+	};
+
+
+	function pretendRequest(userName, pass, cb) {
+	  setTimeout(function () {
+	    if (userName === 'lzsheng' && pass === '123456') {
+	      cb({
+	        authenticated: true,
+	        token: Math.random().toString(36).substring(7)
+	      });
+	    } else {
+	      cb({ authenticated: false });
+	    }
+	  }, 0);
+	}
+
+/***/ },
+/* 251 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _Home = __webpack_require__(252);
 
 	Object.defineProperty(exports, 'default', {
 	  enumerable: true,
@@ -27327,7 +28417,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 242 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27363,7 +28453,7 @@
 	exports.default = Home;
 
 /***/ },
-/* 243 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27372,7 +28462,7 @@
 	  value: true
 	});
 
-	var _Repos = __webpack_require__(244);
+	var _Repos = __webpack_require__(254);
 
 	Object.defineProperty(exports, 'default', {
 	  enumerable: true,
@@ -27384,7 +28474,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 244 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27412,7 +28502,13 @@
 	    _react2.default.createElement(
 	      'h5',
 	      null,
+	      '\u53C2\u6570:',
 	      props.params.name
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      props.children
 	    )
 	  );
 	};
@@ -27424,7 +28520,7 @@
 	exports.default = Repos;
 
 /***/ },
-/* 245 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27433,7 +28529,65 @@
 	  value: true
 	});
 
-	var _About = __webpack_require__(246);
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Repo = function (_Component) {
+	  _inherits(Repo, _Component);
+
+	  function Repo(props) {
+	    _classCallCheck(this, Repo);
+
+	    var _this = _possibleConstructorReturn(this, (Repo.__proto__ || Object.getPrototypeOf(Repo)).call(this, props));
+
+	    _this.state = {};
+	    return _this;
+	  }
+
+	  _createClass(Repo, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h4',
+	          null,
+	          'Repo'
+	        ),
+	        '\u6211\u662F\u5B50\u8DEF\u7531\u5339\u914D\u7684\u7EC4\u4EF6:',
+	        this.props.params.name
+	      );
+	    }
+	  }]);
+
+	  return Repo;
+	}(_react.Component);
+
+	exports.default = Repo;
+
+/***/ },
+/* 256 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _About = __webpack_require__(257);
 
 	Object.defineProperty(exports, 'default', {
 	  enumerable: true,
@@ -27445,7 +28599,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 246 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27460,9 +28614,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _jquery = __webpack_require__(247);
+	var _reactRouter = __webpack_require__(173);
+
+	var _jquery = __webpack_require__(258);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
+
+	var _auth = __webpack_require__(250);
+
+	var _auth2 = _interopRequireDefault(_auth);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27480,6 +28640,7 @@
 
 	        var _this = _possibleConstructorReturn(this, (About.__proto__ || Object.getPrototypeOf(About)).call(this, props));
 
+	        console.log("About", props);
 	        _this.state = {
 	            login: '',
 	            githubtUrl: '',
@@ -27489,15 +28650,26 @@
 	    }
 
 	    _createClass(About, [{
+	        key: '_logout',
+	        value: function _logout(e) {
+	            var _this2 = this;
+
+	            console.log("点击了'模拟注销'按钮");
+	            var cb = function cb() {
+	                _this2.props.router.replace("/");
+	            };
+	            _auth2.default.logout(cb);
+	        }
+	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            var _this2 = this;
+	            var _this3 = this;
 
 	            _jquery2.default.get(this.props.source || 'https://api.github.com/users/lzsheng', function (result) {
 	                console.log(result);
 	                var data = result;
 	                if (data) {
-	                    _this2.setState({
+	                    _this3.setState({
 	                        login: data.login,
 	                        githubtUrl: data.html_url,
 	                        avatarUrl: data.avatar_url
@@ -27508,6 +28680,8 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _this4 = this;
+
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'about' },
@@ -27521,6 +28695,13 @@
 	                        this.state.login,
 	                        ' Github Link'
 	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { onClick: function onClick(e) {
+	                            return _this4._logout(e);
+	                        } },
+	                    '\u6A21\u62DF\u6CE8\u9500'
 	                )
 	            );
 	        }
@@ -27529,10 +28710,10 @@
 	    return About;
 	}(_react.Component);
 
-	exports.default = About;
+	exports.default = (0, _reactRouter.withRouter)(About);
 
 /***/ },
-/* 247 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -37758,7 +38939,7 @@
 
 
 /***/ },
-/* 248 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37767,7 +38948,7 @@
 	  value: true
 	});
 
-	var _User = __webpack_require__(249);
+	var _User = __webpack_require__(260);
 
 	Object.defineProperty(exports, 'default', {
 	  enumerable: true,
@@ -37779,7 +38960,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 249 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37805,7 +38986,7 @@
 	exports.default = User;
 
 /***/ },
-/* 250 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37814,7 +38995,7 @@
 	  value: true
 	});
 
-	var _Contacts = __webpack_require__(251);
+	var _Contacts = __webpack_require__(262);
 
 	Object.defineProperty(exports, 'default', {
 	  enumerable: true,
@@ -37826,7 +39007,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 251 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37841,11 +39022,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _List = __webpack_require__(252);
+	var _List = __webpack_require__(263);
 
 	var _List2 = _interopRequireDefault(_List);
 
-	var _Storage = __webpack_require__(253);
+	var _Storage = __webpack_require__(264);
 
 	var _Storage2 = _interopRequireDefault(_Storage);
 
@@ -37998,7 +39179,7 @@
 	exports.default = Contacts;
 
 /***/ },
-/* 252 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -38033,6 +39214,7 @@
 
 	        var _this = _possibleConstructorReturn(this, (List.__proto__ || Object.getPrototypeOf(List)).call(this, props));
 
+	        console.log(props);
 	        _this.state = {};
 	        return _this;
 	    }
@@ -38042,6 +39224,11 @@
 	        value: function _delItem(e, index) {
 	            console.log(e, index);
 	            this.props._Del(index);
+	        }
+	    }, {
+	        key: "_toContactsDetail",
+	        value: function _toContactsDetail(e, name, age, tel) {
+	            window.location.hash = "/ContactsDetail/" + name + "/" + age + "/" + tel;
 	        }
 	    }, {
 	        key: "render",
@@ -38062,13 +39249,23 @@
 	                        item.age,
 	                        " \u7535\u8BDD:",
 	                        item.tel,
-	                        " ",
 	                        _react2.default.createElement(
-	                            "span",
-	                            { className: "deleteItem", onClick: function onClick(e) {
-	                                    return _this2._delItem(e, index);
-	                                } },
-	                            "\u5220\u9664"
+	                            "div",
+	                            { style: !!_this2.props.isHideBtn ? { display: "none" } : { display: "block" } },
+	                            _react2.default.createElement(
+	                                "span",
+	                                { className: "detailItem", onClick: function onClick(e) {
+	                                        return _this2._toContactsDetail(e, item.name, item.age, item.tel);
+	                                    } },
+	                                "\u8BE6\u60C5"
+	                            ),
+	                            _react2.default.createElement(
+	                                "span",
+	                                { className: "deleteItem", onClick: function onClick(e) {
+	                                        return _this2._delItem(e, index);
+	                                    } },
+	                                "\u5220\u9664"
+	                            )
 	                        )
 	                    );
 	                })
@@ -38086,7 +39283,7 @@
 	exports.default = List;
 
 /***/ },
-/* 253 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -38095,9 +39292,9 @@
 	    value: true
 	});
 
-	var _Until = __webpack_require__(254);
+	var _until = __webpack_require__(265);
 
-	var _Until2 = _interopRequireDefault(_Until);
+	var _until2 = _interopRequireDefault(_until);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38106,19 +39303,19 @@
 	 */
 	var exportObj = {
 	    save: function save(data) {
-	        var mydata = _Until2.default.toJsonString(data);
+	        var mydata = _until2.default.toJsonString(data);
 	        localStorage.contacts = mydata;
 	    },
 	    get: function get() {
 	        var data = localStorage.contacts;
-	        return _Until2.default.toJson(data);
+	        return _until2.default.toJson(data);
 	    }
 	};
 
 	exports.default = exportObj;
 
 /***/ },
-/* 254 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38127,19 +39324,19 @@
 	  value: true
 	});
 
-	var _Until = __webpack_require__(255);
+	var _until = __webpack_require__(266);
 
 	Object.defineProperty(exports, 'default', {
 	  enumerable: true,
 	  get: function get() {
-	    return _interopRequireDefault(_Until).default;
+	    return _interopRequireDefault(_until).default;
 	  }
 	});
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 255 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -38179,16 +39376,69 @@
 	exports.default = exportsObj;
 
 /***/ },
-/* 256 */
+/* 267 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _List = __webpack_require__(263);
+
+	var _List2 = _interopRequireDefault(_List);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ContactsDetail = function (_Component) {
+	  _inherits(ContactsDetail, _Component);
+
+	  function ContactsDetail(props) {
+	    _classCallCheck(this, ContactsDetail);
+
+	    var _this = _possibleConstructorReturn(this, (ContactsDetail.__proto__ || Object.getPrototypeOf(ContactsDetail)).call(this, props));
+
+	    _this.state = {};
+	    return _this;
+	  }
+
+	  _createClass(ContactsDetail, [{
+	    key: 'render',
+	    value: function render() {
+	      var data = [this.props.params];
+	      return _react2.default.createElement(_List2.default, { data: data, isHideBtn: 'false' });
+	    }
+	  }]);
+
+	  return ContactsDetail;
+	}(_react.Component);
+
+	exports.default = ContactsDetail;
+
+/***/ },
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(257);
+	var content = __webpack_require__(269);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(259)(content, {});
+	var update = __webpack_require__(271)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -38205,10 +39455,10 @@
 	}
 
 /***/ },
-/* 257 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(258)();
+	exports = module.exports = __webpack_require__(270)();
 	// imports
 
 
@@ -38219,7 +39469,7 @@
 
 
 /***/ },
-/* 258 */
+/* 270 */
 /***/ function(module, exports) {
 
 	/*
@@ -38275,7 +39525,7 @@
 
 
 /***/ },
-/* 259 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -38527,16 +39777,16 @@
 
 
 /***/ },
-/* 260 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(261);
+	var content = __webpack_require__(273);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(259)(content, {});
+	var update = __webpack_require__(275)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -38553,17 +39803,325 @@
 	}
 
 /***/ },
-/* 261 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(258)();
+	exports = module.exports = __webpack_require__(274)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "body {\n  font-family: \"Arial\", \"Helvetica\", \"sans-serif\", \"Microsoft YaHei\";\n  max-width: 540px;\n  margin: 0 auto;\n  overflow-x: hidden;\n  font-size: 14px; }\n\nul, li {\n  padding: 0;\n  margin: 0;\n  list-style: none; }\n\np {\n  margin: 0;\n  padding: 0; }\n\nimg {\n  max-width: 100%; }\n\na {\n  text-decoration: none; }\n\n.content {\n  overflow-x: hidden; }\n\n.clearfix:before, .clearfix:after {\n  content: \" \";\n  display: table; }\n\n.clearfix:after {\n  clear: both; }\n\n*, :after, :before {\n  box-sizing: border-box; }\n\ninput, textarea {\n  -webkit-appearance: none; }\n\n.borderT:after {\n  content: \" \";\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 1px;\n  border-top: 1px solid #C7C7C7;\n  color: #C7C7C7;\n  transform-origin: 0 0;\n  transform: scaleY(0.5); }\n\n.borderB:after {\n  content: \" \";\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  width: 100%;\n  height: 1px;\n  border-bottom: 1px solid #C7C7C7;\n  color: #C7C7C7;\n  transform-origin: 0 100%;\n  transform: scaleY(0.5); }\n\n.borderL:after {\n  content: \" \";\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 1px;\n  height: 100%;\n  border-left: 1px solid #C7C7C7;\n  color: #C7C7C7;\n  transform-origin: 0 0;\n  transform: scaleX(0.5); }\n\n.borderR:after {\n  content: \" \";\n  position: absolute;\n  right: 0;\n  top: 0;\n  width: 1px;\n  height: 100%;\n  border-right: 1px solid #C7C7C7;\n  color: #C7C7C7;\n  transform-origin: 100% 0;\n  transform: scaleX(0.5); }\n\n.font10 {\n  font-size: 10px !important; }\n\n.font12 {\n  font-size: 12px !important; }\n\n.font14 {\n  font-size: 14px !important; }\n\n.font16 {\n  font-size: 16px !important; }\n\n.font18 {\n  font-size: 18px !important; }\n\n.font20 {\n  font-size: 20px !important; }\n\n.font22 {\n  font-size: 22px !important; }\n\n.font24 {\n  font-size: 24px !important; }\n\n.font26 {\n  font-size: 26px !important; }\n\n.font28 {\n  font-size: 28px !important; }\n\n.font30 {\n  font-size: 30px !important; }\n\n.marginT1 {\n  margin-top: 1px !important; }\n\n.marginB1 {\n  margin-bottom: 1px !important; }\n\n.marginL1 {\n  margin-left: 1px !important; }\n\n.marginR1 {\n  margin-right: 1px !important; }\n\n.marginT2 {\n  margin-top: 2px !important; }\n\n.marginB2 {\n  margin-bottom: 2px !important; }\n\n.marginL2 {\n  margin-left: 2px !important; }\n\n.marginR2 {\n  margin-right: 2px !important; }\n\n.marginT3 {\n  margin-top: 3px !important; }\n\n.marginB3 {\n  margin-bottom: 3px !important; }\n\n.marginL3 {\n  margin-left: 3px !important; }\n\n.marginR3 {\n  margin-right: 3px !important; }\n\n.marginT4 {\n  margin-top: 4px !important; }\n\n.marginB4 {\n  margin-bottom: 4px !important; }\n\n.marginL4 {\n  margin-left: 4px !important; }\n\n.marginR4 {\n  margin-right: 4px !important; }\n\n.marginT5 {\n  margin-top: 5px !important; }\n\n.marginB5 {\n  margin-bottom: 5px !important; }\n\n.marginL5 {\n  margin-left: 5px !important; }\n\n.marginR5 {\n  margin-right: 5px !important; }\n\n.marginT6 {\n  margin-top: 6px !important; }\n\n.marginB6 {\n  margin-bottom: 6px !important; }\n\n.marginL6 {\n  margin-left: 6px !important; }\n\n.marginR6 {\n  margin-right: 6px !important; }\n\n.marginT7 {\n  margin-top: 7px !important; }\n\n.marginB7 {\n  margin-bottom: 7px !important; }\n\n.marginL7 {\n  margin-left: 7px !important; }\n\n.marginR7 {\n  margin-right: 7px !important; }\n\n.marginT8 {\n  margin-top: 8px !important; }\n\n.marginB8 {\n  margin-bottom: 8px !important; }\n\n.marginL8 {\n  margin-left: 8px !important; }\n\n.marginR8 {\n  margin-right: 8px !important; }\n\n.marginT9 {\n  margin-top: 9px !important; }\n\n.marginB9 {\n  margin-bottom: 9px !important; }\n\n.marginL9 {\n  margin-left: 9px !important; }\n\n.marginR9 {\n  margin-right: 9px !important; }\n\n.marginT10 {\n  margin-top: 10px !important; }\n\n.marginB10 {\n  margin-bottom: 10px !important; }\n\n.marginL10 {\n  margin-left: 10px !important; }\n\n.marginR10 {\n  margin-right: 10px !important; }\n\n.paddingT1 {\n  padding-top: 1px !important; }\n\n.paddingB1 {\n  padding-bottom: 1px !important; }\n\n.paddingL1 {\n  padding-left: 1px !important; }\n\n.paddingR1 {\n  padding-right: 1px !important; }\n\n.paddingT2 {\n  padding-top: 2px !important; }\n\n.paddingB2 {\n  padding-bottom: 2px !important; }\n\n.paddingL2 {\n  padding-left: 2px !important; }\n\n.paddingR2 {\n  padding-right: 2px !important; }\n\n.paddingT3 {\n  padding-top: 3px !important; }\n\n.paddingB3 {\n  padding-bottom: 3px !important; }\n\n.paddingL3 {\n  padding-left: 3px !important; }\n\n.paddingR3 {\n  padding-right: 3px !important; }\n\n.paddingT4 {\n  padding-top: 4px !important; }\n\n.paddingB4 {\n  padding-bottom: 4px !important; }\n\n.paddingL4 {\n  padding-left: 4px !important; }\n\n.paddingR4 {\n  padding-right: 4px !important; }\n\n.paddingT5 {\n  padding-top: 5px !important; }\n\n.paddingB5 {\n  padding-bottom: 5px !important; }\n\n.paddingL5 {\n  padding-left: 5px !important; }\n\n.paddingR5 {\n  padding-right: 5px !important; }\n\n.paddingT6 {\n  padding-top: 6px !important; }\n\n.paddingB6 {\n  padding-bottom: 6px !important; }\n\n.paddingL6 {\n  padding-left: 6px !important; }\n\n.paddingR6 {\n  padding-right: 6px !important; }\n\n.paddingT7 {\n  padding-top: 7px !important; }\n\n.paddingB7 {\n  padding-bottom: 7px !important; }\n\n.paddingL7 {\n  padding-left: 7px !important; }\n\n.paddingR7 {\n  padding-right: 7px !important; }\n\n.paddingT8 {\n  padding-top: 8px !important; }\n\n.paddingB8 {\n  padding-bottom: 8px !important; }\n\n.paddingL8 {\n  padding-left: 8px !important; }\n\n.paddingR8 {\n  padding-right: 8px !important; }\n\n.paddingT9 {\n  padding-top: 9px !important; }\n\n.paddingB9 {\n  padding-bottom: 9px !important; }\n\n.paddingL9 {\n  padding-left: 9px !important; }\n\n.paddingR9 {\n  padding-right: 9px !important; }\n\n.paddingT10 {\n  padding-top: 10px !important; }\n\n.paddingB10 {\n  padding-bottom: 10px !important; }\n\n.paddingL10 {\n  padding-left: 10px !important; }\n\n.paddingR10 {\n  padding-right: 10px !important; }\n\n.mainColor {\n  color: #ff284c; }\n\n.blackColor {\n  color: black; }\n\n.fontBold {\n  font-weight: bold; }\n\n.ellipsis {\n  width: 100%;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  word-wrap: normal; }\n\n.ellipsisLn2 {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n  word-wrap: break-word;\n  word-break: break-all; }\n\n.ellipsisLn3 {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 3;\n  word-wrap: break-word;\n  word-break: break-all; }\n\n.content {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-color: #f8f8f8;\n  font-size: 16px;\n  overflow: auto;\n  -webkit-overflow-scrolling: touch; }\n\n.topBar ~ .content {\n  top: 3rem; }\n\n.footerNav ~ .content {\n  bottom: 2.5rem; }\n\n.topBar {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 3rem;\n  line-height: 3rem;\n  background-color: #f8f8f8;\n  text-align: center;\n  font-size: 16px; }\n  .topBar:after {\n    content: \" \";\n    position: absolute;\n    left: 0;\n    bottom: 0;\n    width: 100%;\n    height: 1px;\n    border-bottom: 1px solid #C7C7C7;\n    color: #C7C7C7;\n    transform-origin: 0 100%;\n    transform: scaleY(0.5); }\n\n.footerNav {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  height: 2.5rem;\n  background-color: #f8f8f8; }\n  .footerNav ul {\n    display: -ms-flexbox;\n    display: flex;\n    height: 100%;\n    position: relative; }\n    .footerNav ul:after {\n      content: \" \";\n      position: absolute;\n      left: 0;\n      top: 0;\n      width: 100%;\n      height: 1px;\n      border-top: 1px solid #C7C7C7;\n      color: #C7C7C7;\n      transform-origin: 0 0;\n      transform: scaleY(0.5); }\n    .footerNav ul li {\n      -ms-flex: 1;\n          flex: 1;\n      -ms-flex-pack: center;\n          justify-content: center;\n      height: 100%;\n      display: -ms-flexbox;\n      display: flex;\n      position: relative; }\n      .footerNav ul li:after {\n        content: \" \";\n        position: absolute;\n        right: 0;\n        top: 0;\n        width: 1px;\n        height: 100%;\n        border-right: 1px solid #C7C7C7;\n        color: #C7C7C7;\n        transform-origin: 100% 0;\n        transform: scaleX(0.5); }\n      .footerNav ul li a {\n        -ms-flex-pack: center;\n            justify-content: center;\n        height: 100%;\n        line-height: 2.5rem; }\n\n.home {\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-pack: center;\n      justify-content: center;\n  -ms-flex-align: center;\n      align-items: center;\n  -ms-flex-direction: column;\n      flex-direction: column; }\n  .home .homeImg {\n    border-radius: 50%;\n    width: 60%;\n    margin-top: 4em; }\n\n.contacts .formList {\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-direction: column;\n      flex-direction: column; }\n  .contacts .formList .item {\n    position: relative;\n    height: 40px;\n    padding: 8px 10px;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-align: center;\n        align-items: center; }\n    .contacts .formList .item:after {\n      content: \" \";\n      position: absolute;\n      left: 0;\n      bottom: 0;\n      width: 100%;\n      height: 1px;\n      border-bottom: 1px solid #C7C7C7;\n      color: #C7C7C7;\n      transform-origin: 0 100%;\n      transform: scaleY(0.5); }\n    .contacts .formList .item input {\n      margin-left: 10px;\n      height: 100%;\n      border: none; }\n\n.contacts .addBtn {\n  display: block;\n  margin: 0 auto;\n  height: 34px;\n  line-height: 34px;\n  font-size: 16px;\n  background: dodgerblue;\n  color: white;\n  text-align: center; }\n\n.contacts .list {\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-direction: column;\n      flex-direction: column; }\n  .contacts .list li {\n    position: relative;\n    padding: 8px; }\n    .contacts .list li:after {\n      content: \" \";\n      position: absolute;\n      left: 0;\n      bottom: 0;\n      width: 100%;\n      height: 1px;\n      border-bottom: 1px solid #C7C7C7;\n      color: #C7C7C7;\n      transform-origin: 0 100%;\n      transform: scaleY(0.5); }\n    .contacts .list li:hover .deleteItem {\n      color: mediumvioletred; }\n    .contacts .list li .deleteItem {\n      float: right;\n      text-decoration: underline; }\n\n.about img {\n  display: block;\n  width: 40%;\n  margin: 10px auto;\n  transform: skewX(0deg);\n  transition: all 2s;\n  animation: githubRun 4s ease-in-out; }\n\n.about h3 {\n  text-align: center; }\n\n@keyframes githubRun {\n  0%, 100% {\n    transform: skewX(0deg); }\n  35% {\n    transform: skewX(15deg); }\n  65% {\n    transform: skewX(-15deg); } }\n", ""]);
+	exports.push([module.id, "body {\n  font-family: \"Arial\", \"Helvetica\", \"sans-serif\", \"Microsoft YaHei\";\n  max-width: 540px;\n  margin: 0 auto;\n  overflow-x: hidden;\n  font-size: 14px; }\n\nul, li {\n  padding: 0;\n  margin: 0;\n  list-style: none; }\n\np {\n  margin: 0;\n  padding: 0; }\n\nimg {\n  max-width: 100%; }\n\na {\n  text-decoration: none; }\n\n.clearfix:before, .clearfix:after {\n  content: \" \";\n  display: table; }\n\n.clearfix:after {\n  clear: both; }\n\n*, :after, :before {\n  box-sizing: border-box; }\n\ninput, textarea {\n  -webkit-appearance: none; }\n\n.borderT:after {\n  content: \" \";\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 1px;\n  border-top: 1px solid #C7C7C7;\n  color: #C7C7C7;\n  transform-origin: 0 0;\n  transform: scaleY(0.5); }\n\n.borderB:after {\n  content: \" \";\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  width: 100%;\n  height: 1px;\n  border-bottom: 1px solid #C7C7C7;\n  color: #C7C7C7;\n  transform-origin: 0 100%;\n  transform: scaleY(0.5); }\n\n.borderL:after {\n  content: \" \";\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 1px;\n  height: 100%;\n  border-left: 1px solid #C7C7C7;\n  color: #C7C7C7;\n  transform-origin: 0 0;\n  transform: scaleX(0.5); }\n\n.borderR:after {\n  content: \" \";\n  position: absolute;\n  right: 0;\n  top: 0;\n  width: 1px;\n  height: 100%;\n  border-right: 1px solid #C7C7C7;\n  color: #C7C7C7;\n  transform-origin: 100% 0;\n  transform: scaleX(0.5); }\n\n.example-enter {\n  animation-duration: 1s;\n  animation-fill-mode: both; }\n\n.example-enter.example-enter-active {\n  animation-name: bounceInRight; }\n\n.example-leave {\n  animation-duration: 1s;\n  animation-fill-mode: both; }\n\n.example-leave.example-leave-active {\n  animation-name: bounceOutLeft; }\n\n@keyframes bounceInRight {\n  from, 60%, 75%, 90%, to {\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); }\n  from {\n    opacity: 0;\n    transform: translate3d(3000px, 0, 0); }\n  60% {\n    opacity: 1;\n    transform: translate3d(-25px, 0, 0); }\n  75% {\n    transform: translate3d(10px, 0, 0); }\n  90% {\n    transform: translate3d(-5px, 0, 0); }\n  to {\n    transform: none; } }\n\n@keyframes bounceOutLeft {\n  20% {\n    opacity: 1;\n    transform: translate3d(20px, 0, 0); }\n  to {\n    opacity: 0;\n    transform: translate3d(-2000px, 0, 0); } }\n\n.font10 {\n  font-size: 10px !important; }\n\n.font12 {\n  font-size: 12px !important; }\n\n.font14 {\n  font-size: 14px !important; }\n\n.font16 {\n  font-size: 16px !important; }\n\n.font18 {\n  font-size: 18px !important; }\n\n.font20 {\n  font-size: 20px !important; }\n\n.font22 {\n  font-size: 22px !important; }\n\n.font24 {\n  font-size: 24px !important; }\n\n.font26 {\n  font-size: 26px !important; }\n\n.font28 {\n  font-size: 28px !important; }\n\n.font30 {\n  font-size: 30px !important; }\n\n.marginT1 {\n  margin-top: 1px !important; }\n\n.marginB1 {\n  margin-bottom: 1px !important; }\n\n.marginL1 {\n  margin-left: 1px !important; }\n\n.marginR1 {\n  margin-right: 1px !important; }\n\n.marginT2 {\n  margin-top: 2px !important; }\n\n.marginB2 {\n  margin-bottom: 2px !important; }\n\n.marginL2 {\n  margin-left: 2px !important; }\n\n.marginR2 {\n  margin-right: 2px !important; }\n\n.marginT3 {\n  margin-top: 3px !important; }\n\n.marginB3 {\n  margin-bottom: 3px !important; }\n\n.marginL3 {\n  margin-left: 3px !important; }\n\n.marginR3 {\n  margin-right: 3px !important; }\n\n.marginT4 {\n  margin-top: 4px !important; }\n\n.marginB4 {\n  margin-bottom: 4px !important; }\n\n.marginL4 {\n  margin-left: 4px !important; }\n\n.marginR4 {\n  margin-right: 4px !important; }\n\n.marginT5 {\n  margin-top: 5px !important; }\n\n.marginB5 {\n  margin-bottom: 5px !important; }\n\n.marginL5 {\n  margin-left: 5px !important; }\n\n.marginR5 {\n  margin-right: 5px !important; }\n\n.marginT6 {\n  margin-top: 6px !important; }\n\n.marginB6 {\n  margin-bottom: 6px !important; }\n\n.marginL6 {\n  margin-left: 6px !important; }\n\n.marginR6 {\n  margin-right: 6px !important; }\n\n.marginT7 {\n  margin-top: 7px !important; }\n\n.marginB7 {\n  margin-bottom: 7px !important; }\n\n.marginL7 {\n  margin-left: 7px !important; }\n\n.marginR7 {\n  margin-right: 7px !important; }\n\n.marginT8 {\n  margin-top: 8px !important; }\n\n.marginB8 {\n  margin-bottom: 8px !important; }\n\n.marginL8 {\n  margin-left: 8px !important; }\n\n.marginR8 {\n  margin-right: 8px !important; }\n\n.marginT9 {\n  margin-top: 9px !important; }\n\n.marginB9 {\n  margin-bottom: 9px !important; }\n\n.marginL9 {\n  margin-left: 9px !important; }\n\n.marginR9 {\n  margin-right: 9px !important; }\n\n.marginT10 {\n  margin-top: 10px !important; }\n\n.marginB10 {\n  margin-bottom: 10px !important; }\n\n.marginL10 {\n  margin-left: 10px !important; }\n\n.marginR10 {\n  margin-right: 10px !important; }\n\n.paddingT1 {\n  padding-top: 1px !important; }\n\n.paddingB1 {\n  padding-bottom: 1px !important; }\n\n.paddingL1 {\n  padding-left: 1px !important; }\n\n.paddingR1 {\n  padding-right: 1px !important; }\n\n.paddingT2 {\n  padding-top: 2px !important; }\n\n.paddingB2 {\n  padding-bottom: 2px !important; }\n\n.paddingL2 {\n  padding-left: 2px !important; }\n\n.paddingR2 {\n  padding-right: 2px !important; }\n\n.paddingT3 {\n  padding-top: 3px !important; }\n\n.paddingB3 {\n  padding-bottom: 3px !important; }\n\n.paddingL3 {\n  padding-left: 3px !important; }\n\n.paddingR3 {\n  padding-right: 3px !important; }\n\n.paddingT4 {\n  padding-top: 4px !important; }\n\n.paddingB4 {\n  padding-bottom: 4px !important; }\n\n.paddingL4 {\n  padding-left: 4px !important; }\n\n.paddingR4 {\n  padding-right: 4px !important; }\n\n.paddingT5 {\n  padding-top: 5px !important; }\n\n.paddingB5 {\n  padding-bottom: 5px !important; }\n\n.paddingL5 {\n  padding-left: 5px !important; }\n\n.paddingR5 {\n  padding-right: 5px !important; }\n\n.paddingT6 {\n  padding-top: 6px !important; }\n\n.paddingB6 {\n  padding-bottom: 6px !important; }\n\n.paddingL6 {\n  padding-left: 6px !important; }\n\n.paddingR6 {\n  padding-right: 6px !important; }\n\n.paddingT7 {\n  padding-top: 7px !important; }\n\n.paddingB7 {\n  padding-bottom: 7px !important; }\n\n.paddingL7 {\n  padding-left: 7px !important; }\n\n.paddingR7 {\n  padding-right: 7px !important; }\n\n.paddingT8 {\n  padding-top: 8px !important; }\n\n.paddingB8 {\n  padding-bottom: 8px !important; }\n\n.paddingL8 {\n  padding-left: 8px !important; }\n\n.paddingR8 {\n  padding-right: 8px !important; }\n\n.paddingT9 {\n  padding-top: 9px !important; }\n\n.paddingB9 {\n  padding-bottom: 9px !important; }\n\n.paddingL9 {\n  padding-left: 9px !important; }\n\n.paddingR9 {\n  padding-right: 9px !important; }\n\n.paddingT10 {\n  padding-top: 10px !important; }\n\n.paddingB10 {\n  padding-bottom: 10px !important; }\n\n.paddingL10 {\n  padding-left: 10px !important; }\n\n.paddingR10 {\n  padding-right: 10px !important; }\n\n.mainColor {\n  color: #ff284c; }\n\n.blackColor {\n  color: black; }\n\n.fontBold {\n  font-weight: bold; }\n\n.ellipsis {\n  width: 100%;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  word-wrap: normal; }\n\n.ellipsisLn2 {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n  word-wrap: break-word;\n  word-break: break-all; }\n\n.ellipsisLn3 {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 3;\n  word-wrap: break-word;\n  word-break: break-all; }\n\n.content {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0; }\n\n.topBar ~ .content {\n  top: 3rem; }\n\n.footerNav ~ .content {\n  bottom: 2.5rem; }\n\n.routerContent {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-color: #f8f8f8;\n  font-size: 16px;\n  overflow: auto;\n  overflow-x: hidden;\n  -webkit-overflow-scrolling: touch; }\n\n.topBar {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 3rem;\n  line-height: 3rem;\n  background-color: #f8f8f8;\n  text-align: center;\n  font-size: 16px; }\n  .topBar:after {\n    content: \" \";\n    position: absolute;\n    left: 0;\n    bottom: 0;\n    width: 100%;\n    height: 1px;\n    border-bottom: 1px solid #C7C7C7;\n    color: #C7C7C7;\n    transform-origin: 0 100%;\n    transform: scaleY(0.5); }\n\n.footerNav {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  height: 2.5rem;\n  background-color: #f8f8f8; }\n  .footerNav ul {\n    display: -ms-flexbox;\n    display: flex;\n    height: 100%;\n    position: relative; }\n    .footerNav ul:after {\n      content: \" \";\n      position: absolute;\n      left: 0;\n      top: 0;\n      width: 100%;\n      height: 1px;\n      border-top: 1px solid #C7C7C7;\n      color: #C7C7C7;\n      transform-origin: 0 0;\n      transform: scaleY(0.5); }\n    .footerNav ul li {\n      -ms-flex: 1;\n          flex: 1;\n      -ms-flex-pack: center;\n          justify-content: center;\n      height: 100%;\n      display: -ms-flexbox;\n      display: flex;\n      position: relative; }\n      .footerNav ul li:after {\n        content: \" \";\n        position: absolute;\n        right: 0;\n        top: 0;\n        width: 1px;\n        height: 100%;\n        border-right: 1px solid #C7C7C7;\n        color: #C7C7C7;\n        transform-origin: 100% 0;\n        transform: scaleX(0.5); }\n      .footerNav ul li a {\n        -ms-flex-pack: center;\n            justify-content: center;\n        height: 100%;\n        line-height: 2.5rem; }\n\n.home {\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-pack: center;\n      justify-content: center;\n  -ms-flex-align: center;\n      align-items: center;\n  -ms-flex-direction: column;\n      flex-direction: column; }\n  .home .homeImg {\n    border-radius: 50%;\n    width: 60%;\n    margin-top: 4em; }\n\n.contacts .formList {\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-direction: column;\n      flex-direction: column; }\n  .contacts .formList .item {\n    position: relative;\n    height: 40px;\n    padding: 8px 10px;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-align: center;\n        align-items: center; }\n    .contacts .formList .item:after {\n      content: \" \";\n      position: absolute;\n      left: 0;\n      bottom: 0;\n      width: 100%;\n      height: 1px;\n      border-bottom: 1px solid #C7C7C7;\n      color: #C7C7C7;\n      transform-origin: 0 100%;\n      transform: scaleY(0.5); }\n    .contacts .formList .item input {\n      margin-left: 10px;\n      height: 100%;\n      border: none; }\n\n.contacts .addBtn {\n  display: block;\n  margin: 0 auto;\n  height: 34px;\n  line-height: 34px;\n  font-size: 16px;\n  background: dodgerblue;\n  color: white;\n  text-align: center; }\n\n.contacts .list {\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-direction: column;\n      flex-direction: column; }\n  .contacts .list li {\n    position: relative;\n    padding: 8px; }\n    .contacts .list li:after {\n      content: \" \";\n      position: absolute;\n      left: 0;\n      bottom: 0;\n      width: 100%;\n      height: 1px;\n      border-bottom: 1px solid #C7C7C7;\n      color: #C7C7C7;\n      transform-origin: 0 100%;\n      transform: scaleY(0.5); }\n    .contacts .list li:hover .deleteItem {\n      color: mediumvioletred; }\n    .contacts .list li .deleteItem {\n      color: red;\n      margin-right: 3px;\n      float: right;\n      text-decoration: underline; }\n    .contacts .list li:hover .detailItem {\n      color: darkblue; }\n    .contacts .list li .detailItem {\n      color: blueviolet;\n      margin-right: 3px;\n      float: right;\n      text-decoration: underline; }\n\n.about img {\n  display: block;\n  width: 40%;\n  margin: 10px auto;\n  transform: skewX(0deg);\n  transition: all 2s;\n  animation: githubRun 4s ease-in-out; }\n\n.about h3 {\n  text-align: center; }\n\n@keyframes githubRun {\n  0%, 100% {\n    transform: skewX(0deg); }\n  35% {\n    transform: skewX(15deg); }\n  65% {\n    transform: skewX(-15deg); } }\n", ""]);
 
 	// exports
+
+
+/***/ },
+/* 274 */
+/***/ function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function() {
+		var list = [];
+
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
+
+
+/***/ },
+/* 275 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	var stylesInDom = {},
+		memoize = function(fn) {
+			var memo;
+			return function () {
+				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+				return memo;
+			};
+		},
+		isOldIE = memoize(function() {
+			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+		}),
+		getHeadElement = memoize(function () {
+			return document.head || document.getElementsByTagName("head")[0];
+		}),
+		singletonElement = null,
+		singletonCounter = 0,
+		styleElementsInsertedAtTop = [];
+
+	module.exports = function(list, options) {
+		if(false) {
+			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+		}
+
+		options = options || {};
+		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+		// tags it will allow on a page
+		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+
+		// By default, add <style> tags to the bottom of <head>.
+		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
+
+		var styles = listToStyles(list);
+		addStylesToDom(styles, options);
+
+		return function update(newList) {
+			var mayRemove = [];
+			for(var i = 0; i < styles.length; i++) {
+				var item = styles[i];
+				var domStyle = stylesInDom[item.id];
+				domStyle.refs--;
+				mayRemove.push(domStyle);
+			}
+			if(newList) {
+				var newStyles = listToStyles(newList);
+				addStylesToDom(newStyles, options);
+			}
+			for(var i = 0; i < mayRemove.length; i++) {
+				var domStyle = mayRemove[i];
+				if(domStyle.refs === 0) {
+					for(var j = 0; j < domStyle.parts.length; j++)
+						domStyle.parts[j]();
+					delete stylesInDom[domStyle.id];
+				}
+			}
+		};
+	}
+
+	function addStylesToDom(styles, options) {
+		for(var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+			if(domStyle) {
+				domStyle.refs++;
+				for(var j = 0; j < domStyle.parts.length; j++) {
+					domStyle.parts[j](item.parts[j]);
+				}
+				for(; j < item.parts.length; j++) {
+					domStyle.parts.push(addStyle(item.parts[j], options));
+				}
+			} else {
+				var parts = [];
+				for(var j = 0; j < item.parts.length; j++) {
+					parts.push(addStyle(item.parts[j], options));
+				}
+				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+			}
+		}
+	}
+
+	function listToStyles(list) {
+		var styles = [];
+		var newStyles = {};
+		for(var i = 0; i < list.length; i++) {
+			var item = list[i];
+			var id = item[0];
+			var css = item[1];
+			var media = item[2];
+			var sourceMap = item[3];
+			var part = {css: css, media: media, sourceMap: sourceMap};
+			if(!newStyles[id])
+				styles.push(newStyles[id] = {id: id, parts: [part]});
+			else
+				newStyles[id].parts.push(part);
+		}
+		return styles;
+	}
+
+	function insertStyleElement(options, styleElement) {
+		var head = getHeadElement();
+		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
+		if (options.insertAt === "top") {
+			if(!lastStyleElementInsertedAtTop) {
+				head.insertBefore(styleElement, head.firstChild);
+			} else if(lastStyleElementInsertedAtTop.nextSibling) {
+				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
+			} else {
+				head.appendChild(styleElement);
+			}
+			styleElementsInsertedAtTop.push(styleElement);
+		} else if (options.insertAt === "bottom") {
+			head.appendChild(styleElement);
+		} else {
+			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
+		}
+	}
+
+	function removeStyleElement(styleElement) {
+		styleElement.parentNode.removeChild(styleElement);
+		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
+		if(idx >= 0) {
+			styleElementsInsertedAtTop.splice(idx, 1);
+		}
+	}
+
+	function createStyleElement(options) {
+		var styleElement = document.createElement("style");
+		styleElement.type = "text/css";
+		insertStyleElement(options, styleElement);
+		return styleElement;
+	}
+
+	function createLinkElement(options) {
+		var linkElement = document.createElement("link");
+		linkElement.rel = "stylesheet";
+		insertStyleElement(options, linkElement);
+		return linkElement;
+	}
+
+	function addStyle(obj, options) {
+		var styleElement, update, remove;
+
+		if (options.singleton) {
+			var styleIndex = singletonCounter++;
+			styleElement = singletonElement || (singletonElement = createStyleElement(options));
+			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
+			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
+		} else if(obj.sourceMap &&
+			typeof URL === "function" &&
+			typeof URL.createObjectURL === "function" &&
+			typeof URL.revokeObjectURL === "function" &&
+			typeof Blob === "function" &&
+			typeof btoa === "function") {
+			styleElement = createLinkElement(options);
+			update = updateLink.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+				if(styleElement.href)
+					URL.revokeObjectURL(styleElement.href);
+			};
+		} else {
+			styleElement = createStyleElement(options);
+			update = applyToTag.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+			};
+		}
+
+		update(obj);
+
+		return function updateStyle(newObj) {
+			if(newObj) {
+				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
+					return;
+				update(obj = newObj);
+			} else {
+				remove();
+			}
+		};
+	}
+
+	var replaceText = (function () {
+		var textStore = [];
+
+		return function (index, replacement) {
+			textStore[index] = replacement;
+			return textStore.filter(Boolean).join('\n');
+		};
+	})();
+
+	function applyToSingletonTag(styleElement, index, remove, obj) {
+		var css = remove ? "" : obj.css;
+
+		if (styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = replaceText(index, css);
+		} else {
+			var cssNode = document.createTextNode(css);
+			var childNodes = styleElement.childNodes;
+			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
+			if (childNodes.length) {
+				styleElement.insertBefore(cssNode, childNodes[index]);
+			} else {
+				styleElement.appendChild(cssNode);
+			}
+		}
+	}
+
+	function applyToTag(styleElement, obj) {
+		var css = obj.css;
+		var media = obj.media;
+
+		if(media) {
+			styleElement.setAttribute("media", media)
+		}
+
+		if(styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = css;
+		} else {
+			while(styleElement.firstChild) {
+				styleElement.removeChild(styleElement.firstChild);
+			}
+			styleElement.appendChild(document.createTextNode(css));
+		}
+	}
+
+	function updateLink(linkElement, obj) {
+		var css = obj.css;
+		var sourceMap = obj.sourceMap;
+
+		if(sourceMap) {
+			// http://stackoverflow.com/a/26603875
+			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+		}
+
+		var blob = new Blob([css], { type: "text/css" });
+
+		var oldSrc = linkElement.href;
+
+		linkElement.href = URL.createObjectURL(blob);
+
+		if(oldSrc)
+			URL.revokeObjectURL(oldSrc);
+	}
 
 
 /***/ }
