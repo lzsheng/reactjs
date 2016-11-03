@@ -4,6 +4,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 let routerTransitionClassname = "example";
 const App = (props) => {
+  console.info(props)
   return (
   <setion>
   {/* <nav className="topBar">我是页头</nav> */}

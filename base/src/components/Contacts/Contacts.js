@@ -2,6 +2,7 @@ import React, {Component,PropTypes} from 'react';
 import List from './List';
 import Storage from './Storage';
 
+
 class Contacts extends Component {
   constructor(props) {
     super(props);
@@ -9,7 +10,8 @@ class Contacts extends Component {
       entry:{
         name:"",
         age:"",
-        tel:""
+        tel:"",
+        id:""
       },
       history: Storage.get() || []
     };
@@ -35,6 +37,7 @@ class Contacts extends Component {
       obj[key] = this.state.entry[key];
     }
     obj[e.target.id] = e.target.value;//state的key对应id的值
+    obj.id = Date.parse(new Date());
     this.setState({entry:obj});
   }
   _add(e){

@@ -17,8 +17,20 @@ const redirectToLogin = (nextState, replaceState) => {
   if (!auth.loggedIn()) {
     replaceState({
       pathname: '/login',
+      //location state 是一个由任意数据构成的对象，以便和某个特殊的 location 联系起来。它可以被用于在 location 上绑定一些不能通过URL获取的额外状态。
       state: { nextPathname: nextState.location.pathname }//告诉login页面,登录成功后跳转到哪个页面
     })
+  }
+}
+
+class PageNotFound extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Page Not Found.</h1>
+        <p>Go to <Link to="/">Home Page</Link></p>
+      </div>
+    )
   }
 }
 
@@ -26,14 +38,15 @@ ReactDOM.render(
   <Router history={hashHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={Home}/>
-      <Route path="/repos" component={Repos}>
-        <Route path="/repos/:name" component={Repo}/>
+      <Route path="repos" component={Repos}>
+        <Route path=":name" component={Repo}/>
       </Route>
-      <Route path="/contacts" component={Contacts} />
-      <Route path="/ContactsDetail/:name/:age/:tel" component={ContactsDetail} />
-      <Route path="/about" component={About} onEnter={redirectToLogin} />
-      <Route path="/login" component={Login} />
+      <Route path="contacts" component={Contacts} />
+      <Route path="ContactsDetail" component={ContactsDetail} />
+      <Route path="about" component={About} onEnter={redirectToLogin} />
+      <Route path="login" component={Login} />
     </Route>
+    <Route path="*" component={PageNotFound} />
   </Router>,
   document.getElementById('app'));
 

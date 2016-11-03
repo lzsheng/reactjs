@@ -1,4 +1,5 @@
 import React, {Component,PropTypes} from 'react';
+import { Link } from 'react-router';
 /**
  * 显示记录的List
  */
@@ -14,10 +15,6 @@ class List extends Component {
       console.log(e,index);
       this.props._Del(index);
   }
-  _toContactsDetail(e,name,age,tel){
-      let myName = encodeURI(name);
-      window.location.hash = `/ContactsDetail/${myName}/${age}/${tel}`;
-  }
   render(){
     return (
         <ul className="list">
@@ -26,7 +23,7 @@ class List extends Component {
                     return (
                     <li key={index}>{index+1}. 姓名:{item.name} 年龄:{item.age} 电话:{item.tel}
                         <div style={!!this.props.isHideBtn ? {display:"none"}:{display:"block"}}>
-                            <span className="detailItem" onClick={ e=>(this._toContactsDetail(e,item.name,item.age,item.tel)) }>详情</span>
+                            <Link className="detailItem" to={{pathname:'/ContactsDetail',query:{id:item.id} }}>详情</Link>
                             <span className="deleteItem" onClick={ e=>(this._delItem(e,index)) }>删除</span>
                         </div>
                     </li>
