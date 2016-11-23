@@ -10,14 +10,14 @@
         display: flex;
         height: 100%;
         position: relative;
-        @include setTopLineAfter();
+        @include borderTopAfter();
         li{
             flex: 1;
             justify-content: center;
             height: 100%;
             display: flex;
             position: relative;
-            @include setRightLineAfter();
+            @include borderRightAfter();
             a{
                 justify-content: center;
                 height: 100%;

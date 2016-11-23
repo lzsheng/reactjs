@@ -2,7 +2,6 @@
     word-wrap:break-word;
     word-break:break-all;
 }
-
 @mixin ellipsis($w:auto) {
     width: $w;
     overflow: hidden;

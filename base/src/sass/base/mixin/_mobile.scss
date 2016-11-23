@@ -1,5 +1,5 @@
 // tapcolor
-@mixin setTapColor($c:rgba(0,0,0,0)) {
+@mixin setTapColor($c:inherit) {
     -webkit-tap-highlight-color: $c;
 }
 

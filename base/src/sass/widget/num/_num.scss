@@ -30,7 +30,7 @@
 .numberInputLeft{
 	line-height: 28px !important;
 	&:after{
-		@include setRightLine;
+		@include borderRight;
 		top: 0;
 		right: -1px;
 		border-color: #000;
@@ -38,7 +38,7 @@
 }
 .numberInputRight{
 	&:after{
-		@include setLeftLine;
+		@include borderLeft;
 		top: 0;
 		left: 0;
 		border-color: #000;

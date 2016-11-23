@@ -1,7 +1,22 @@
 @import '../variable/_global';
 $onePxColor:$borderColor_default !default;
 
-@mixin setTopLine($color: $onePxColor,$dpr:2) {
+@mixin borderAll($color: $onePxColor,$dpr:2,$radius:10px){
+    content: " ";
+    width: $dpr * 100%;
+    height: $dpr * 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid $color;
+    @include scaleAll($dpr);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    box-sizing: border-box;
+    border-radius: $radius;
+}
+
+@mixin borderTop($color: $onePxColor,$dpr:2) {
     content: " ";
     position: absolute;
     left: 0;
@@ -14,7 +29,7 @@ $onePxColor:$borderColor_default !default;
     @include scaleY($dpr);
 }
 
-@mixin setBottomLine($color: $onePxColor,$dpr:2) {
+@mixin borderBottom($color: $onePxColor,$dpr:2) {
     content: " ";
     position: absolute;
     left: 0;
@@ -27,7 +42,7 @@ $onePxColor:$borderColor_default !default;
     @include scaleY($dpr);
 }
 
-@mixin setLeftLine($color: $onePxColor,$dpr:2) {
+@mixin borderLeft($color: $onePxColor,$dpr:2) {
     content: " ";
     position: absolute;
     left: 0;
@@ -40,7 +55,7 @@ $onePxColor:$borderColor_default !default;
     @include scaleX($dpr);
 }
 
-@mixin setRightLine($color: $onePxColor,$dpr:2) {
+@mixin borderRight($color: $onePxColor,$dpr:2) {
     content: " ";
     position: absolute;
     right: 0;
@@ -62,55 +77,79 @@ $onePxColor:$borderColor_default !default;
     $scale : 1/$dpr;
     transform: scaleY($scale);
 }
+@mixin scaleAll($dpr) {
+    $scale : 1/$dpr;
+    transform: scale($scale);
+}
 
-
-@mixin setTopLineAfter($color: $onePxColor,$dpr:2){
+@mixin borderAllAfter($color: $onePxColor,$dpr:2,$radius:10px){
+    position:relative;
     &:after{
-        @include setTopLine($color,$dpr);
+        @include borderAll($color,$dpr);
     }
 }
-@mixin setTopLineBefore($color: $onePxColor,$dpr:2){
+@mixin borderAllBefore($color: $onePxColor,$dpr:2,$radius:10px){
+    position:relative;
     &:before{
-        @include setTopLine($color,$dpr);
+        @include borderAll($color,$dpr);
     }
 }
 
-@mixin setBottomLineAfter($color: $onePxColor,$dpr:2){
+@mixin borderTopAfter($color: $onePxColor,$dpr:2){
+    position:relative;
     &:after{
-        @include setBottomLine($color,$dpr);
+        @include borderTop($color,$dpr);
     }
 }
-@mixin setBottomLineBefore($color: $onePxColor,$dpr:2){
+@mixin borderTopBefore($color: $onePxColor,$dpr:2){
+    position:relative;
     &:before{
-        @include setBottomLine($color,$dpr);
+        @include borderTop($color,$dpr);
     }
 }
 
-@mixin setLeftLineAfter($color: $onePxColor,$dpr:2){
+@mixin borderBottomAfter($color: $onePxColor,$dpr:2){
+    position:relative;
     &:after{
-        @include setLeftLine($color,$dpr);
+        @include borderBottom($color,$dpr);
     }
 }
-@mixin setLeftLineBefore($color: $onePxColor,$dpr:2){
+@mixin borderBottomBefore($color: $onePxColor,$dpr:2){
+    position:relative;
     &:before{
-        @include setLeftLine($color,$dpr);
+        @include borderBottom($color,$dpr);
     }
 }
 
-@mixin setRightLineAfter($color: $onePxColor,$dpr:2){
+@mixin borderLeftAfter($color: $onePxColor,$dpr:2){
+    position:relative;
     &:after{
-        @include setRightLine($color,$dpr);
+        @include borderLeft($color,$dpr);
     }
 }
-@mixin setRightLineBefore($color: $onePxColor,$dpr:2){
+@mixin borderLeftBefore($color: $onePxColor,$dpr:2){
+    position:relative;
     &:before{
-        @include setRightLine($color,$dpr);
+        @include borderLeft($color,$dpr);
+    }
+}
+
+@mixin borderRightAfter($color: $onePxColor,$dpr:2){
+    position:relative;
+    &:after{
+        @include borderRight($color,$dpr);
+    }
+}
+@mixin borderRightBefore($color: $onePxColor,$dpr:2){
+    position:relative;
+    &:before{
+        @include borderRight($color,$dpr);
     }
 }
 
     //  ===scss===
     // .ir{
-    //     @include setTopLineAfter(#cccccc,2);
+    //     @include borderTopAfter(#cccccc,2);
     // }
 
     // ===css===

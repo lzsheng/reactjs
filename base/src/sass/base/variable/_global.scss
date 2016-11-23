@@ -1,14 +1,14 @@
-$maxWidth:540px;
+$maxWidth:640px;
 $baseFont:"Arial", "Helvetica", "sans-serif","Microsoft YaHei";
-$baseFontSize:16px !default;
+$baseFontSize:14px !default;
 $baseFontColor:#3d4145 !default;
 //整体
 $topBarHeight:3rem !default;
 $footerNavHeight:2.5rem !default;
 
 //border颜色
-$borderColor_default:#C7C7C7 !default;
-$borderColor_lighten:lighten($borderColor_default,15%) !default;
+$borderColor_default:#cecece !default;
+$borderColor_darken:darken($borderColor_default,10%) !default;
 
 //页面风格//
 $mainColor:#ff284c !default;//主色调

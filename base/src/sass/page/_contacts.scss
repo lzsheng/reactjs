@@ -9,7 +9,7 @@
             padding: 8px 10px;
             display: flex;
             align-items: center;
-            @include setBottomLineAfter();
+            @include borderBottomAfter();
             input{
                 margin-left:10px;
                 height: 100%;
@@ -34,7 +34,7 @@
         li{
             position: relative;
             padding:8px;
-            @include setBottomLineAfter();
+            @include borderBottomAfter();
             &:hover .deleteItem{
                 color:mediumvioletred;
             }

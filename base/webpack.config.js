@@ -29,11 +29,11 @@ module.exports = {
         }, 
         {
             test: /\.css$/,
-            loader: 'style-loader!css-loader!autoprefixer-loader?{browsers:["last 2 version"]}'
+            loader: 'style-loader!css-loader!autoprefixer-loader?{browsers:["last 6 version"]}'
         },
         {
             test: /\.scss$/,
-            loader: 'style-loader!css-loader!autoprefixer?browsers=last 2 version!sass-loader'
+            loader: 'style-loader!css-loader!autoprefixer?browsers=last 6 version!sass-loader'
         }],
     },
     devServer: {
