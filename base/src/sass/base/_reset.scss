@@ -1,4 +1,8 @@
 @import '_fn';
+html,body,.container{
+    height: 100%;
+    background-color: #f8f8f8;
+}
 body{
     font-family: $baseFont;
     max-width: $maxWidth;

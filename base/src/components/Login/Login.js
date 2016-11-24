@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Page from '../Page';
 import { withRouter } from 'react-router';
 import auth from '../../Until/auth';
 
@@ -31,6 +32,7 @@ class Login extends Component {
   }
   render() {
     return (
+      <Page transition="B">
       <form className="login" onSubmit={ (e)=>(this.handleSubmit(e)) }>
         <h2>Login</h2>
         <div>User Name</div>
@@ -42,6 +44,7 @@ class Login extends Component {
           <p>错了错了,账号是:lzsheng,密码123456</p>
         )}
       </form>
+      </Page>
     );
   }
 }

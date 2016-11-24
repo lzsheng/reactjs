@@ -1,141 +1,48 @@
-.example-enter {
-    z-index: 1024;
-    opacity: 0.01;
-    transform: translate3d(100%, 0, 0);
-    transition: all .2s ease;
-    &.example-enter-active {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-    }
-}
-
-.example-leave {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-    transition: all .2s ease;
-    &.example-leave-active {
-        opacity: 0.01;
-        transform: translate3d(100%, 0, 0);
-    }
-}
-/*
-.example-enter {
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
-.example-enter.example-enter-active {
-  -webkit-animation-name: bounceInRight;
-  animation-name: bounceInRight;
-}
-
-.example-leave {
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
-.example-leave.example-leave-active {
-  -webkit-animation-name: bounceOutLeft;
-  animation-name: bounceOutLeft;
-}
-
-@-webkit-keyframes bounceInRight {
-  from, 60%, 75%, 90%, to {
-    -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+//"进入的页面"直接切换到"离开的页面"动画(等于无动画)
+.pageTranstion-A{
+  &.pageAnimation-enter {
+      z-index: 1024;
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+      transition: all 0.3s ease;
+      &.pageAnimation-enter-active {
+          transform: translate3d(0, 0, 0);
+          opacity: 1;
+      }
   }
 
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(3000px, 0, 0);
-    transform: translate3d(3000px, 0, 0);
-  }
-
-  60% {
-    opacity: 1;
-    -webkit-transform: translate3d(-25px, 0, 0);
-    transform: translate3d(-25px, 0, 0);
-  }
-
-  75% {
-    -webkit-transform: translate3d(10px, 0, 0);
-    transform: translate3d(10px, 0, 0);
-  }
-
-  90% {
-    -webkit-transform: translate3d(-5px, 0, 0);
-    transform: translate3d(-5px, 0, 0);
-  }
-
-  to {
-    -webkit-transform: none;
-    transform: none;
+  &.pageAnimation-leave {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+      transition: all 0.4s ease;
+      &.pageAnimation-leave-active {
+          transform: translate3d(0, 0, 0);
+          opacity: 0;
+      }
   }
 }
 
-@keyframes bounceInRight {
-  from, 60%, 75%, 90%, to {
-    -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+//"进入的页面"覆盖"离开的页面"动画
+.pageTranstion-B{
+  &.pageAnimation-enter {
+      z-index: 1024;
+      opacity: 0.01;
+      transform: translate3d(100%, 0, 0);
+      transition: all 0.5s ease;
+      &.pageAnimation-enter-active {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+      }
   }
 
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(3000px, 0, 0);
-    transform: translate3d(3000px, 0, 0);
-  }
-
-  60% {
-    opacity: 1;
-    -webkit-transform: translate3d(-25px, 0, 0);
-    transform: translate3d(-25px, 0, 0);
-  }
-
-  75% {
-    -webkit-transform: translate3d(10px, 0, 0);
-    transform: translate3d(10px, 0, 0);
-  }
-
-  90% {
-    -webkit-transform: translate3d(-5px, 0, 0);
-    transform: translate3d(-5px, 0, 0);
-  }
-
-  to {
-    -webkit-transform: none;
-    transform: none;
+  &.pageAnimation-leave {
+      z-index: 1024;
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+      transition: all 0.35s ease;
+      &.pageAnimation-leave-active {
+          opacity: 0.01;
+          transform: translate3d(100%, 0, 0);
+      }
   }
 }
-
-@-webkit-keyframes bounceOutLeft {
-  20% {
-    opacity: 1;
-    -webkit-transform: translate3d(20px, 0, 0);
-    transform: translate3d(20px, 0, 0);
-  }
-
-  to {
-    opacity: 0;
-    -webkit-transform: translate3d(-2000px, 0, 0);
-    transform: translate3d(-2000px, 0, 0);
-  }
-}
-
-@keyframes bounceOutLeft {
-  20% {
-    opacity: 1;
-    -webkit-transform: translate3d(20px, 0, 0);
-    transform: translate3d(20px, 0, 0);
-  }
-
-  to {
-    opacity: 0;
-    -webkit-transform: translate3d(-2000px, 0, 0);
-    transform: translate3d(-2000px, 0, 0);
-  }
-}
-*/

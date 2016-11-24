@@ -1,38 +1,31 @@
 import React from 'react';
-import { Link, IndexLink } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
-let routerTransitionClassname = "example";
+const routerAnimation = {
+  transitionName : "pageAnimation",//"进入的页面"覆盖"离开的页面"动画
+  timeout : 500,//切换时长
+}
+
 const App = (props) => {
-  console.info(props)
+  console.info("APP",props);
+  //显示切换动画
+
   return (
-  <setion>
-  {/* <nav className="topBar">我是页头</nav> */}
-  <footer className="footerNav">
-    <ul>
-      <li><IndexLink to="/" activeClassName="navActive">Home</IndexLink></li>
-      <li><Link to="/repos/myPar" activeClassName="navActive">Repos</Link></li>
-      <li><Link to="/contacts" activeClassName="navActive">Contacts</Link></li>
-      <li><Link to="/about" activeClassName="navActive">About</Link></li>
-    </ul>
-  </footer>
-  
   <ReactCSSTransitionGroup
       component="div"
-      className="content"
-      transitionName={routerTransitionClassname}
-      transitionEnterTimeout={1000}
-      transitionLeaveTimeout={1000}
+      className="container"
+      transitionName={routerAnimation.transitionName}
+      transitionEnterTimeout={routerAnimation.timeout}
+      transitionLeaveTimeout={routerAnimation.timeout}
   >
-  {/*http://www.cnblogs.com/BestMePeng/p/React_Router.html
-    克隆所有子节点，单独的{this.props.children}没有动画效果
-  */}
-  <div className="routerContent" key={props.location.pathname}>
-  {props.children}
-  </div>
+  {/* <nav className="topBar">我是页头</nav> */}
+
+  {React.cloneElement(props.children, {
+    key: props.location.pathname
+  })}
+
   </ReactCSSTransitionGroup>
 
-  </setion>
   )
 };
 

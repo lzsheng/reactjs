@@ -1,7 +1,7 @@
 import React, {Component,PropTypes} from 'react';
+import Page from '../Page';
 import List from './List';
 import Storage from './Storage';
-
 
 class Contacts extends Component {
   constructor(props) {
@@ -66,6 +66,7 @@ class Contacts extends Component {
   }
   render() {
     return (
+      <Page hasFooter="true">
       <div className="contacts">
         <ul className="formList">
           <li className="item"><label>姓名:<input id="name" type="text" className="coolInput" onChange={e=>this._change(e)} value={this.state.entry.name}/></label></li>
@@ -75,6 +76,7 @@ class Contacts extends Component {
         <a className="addBtn" onClick={e=>this._add(e)}>新增</a>
         <List data={this.state.history} _Del={this._Del.bind(this)}/>
       </div>
+      </Page>
     );
   }
 }
