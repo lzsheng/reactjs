@@ -42,7 +42,7 @@ ReactDOM.render(
         <Route path=":name" component={Repo}/>
       </Route>
       <Route path="contacts" component={Contacts} />
-      <Route path="ContactsDetail" component={ContactsDetail} />
+      <Route path="contacts/ContactsDetail" component={ContactsDetail} />
       <Route path="about" component={About} onEnter={redirectToLogin} />
       <Route path="login" component={Login} />
     </Route>
@@ -50,5 +50,9 @@ ReactDOM.render(
   </Router>,
   document.getElementById('app'));
 
-require('normalize.css/normalize.css');
+
+/*样式*/
+// require('normalize.css/normalize.css');
+import 'weui';
 require('./sass/index.scss');
+

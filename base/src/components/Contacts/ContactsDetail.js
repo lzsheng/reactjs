@@ -1,4 +1,5 @@
 import React, {Component,PropTypes} from 'react';
+import Page from '../Page';
 import List from './List';
 import Storage from './Storage';
 
@@ -20,7 +21,9 @@ class ContactsDetail extends Component {
   }
   render() {
     return (
-      <List data={[this.state.thisIdData]} isHideBtn="false" />
+      <Page transition="B">
+        <List data={[this.state.thisIdData]} isHideBtn="false" />
+      </Page>
     );
   }
 }

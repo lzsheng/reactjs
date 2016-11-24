@@ -23,7 +23,7 @@ class List extends Component {
                     return (
                     <li key={index}>{index+1}. 姓名:{item.name} 年龄:{item.age} 电话:{item.tel}
                         <div style={!!this.props.isHideBtn ? {display:"none"}:{display:"block"}}>
-                            <Link className="detailItem" to={{pathname:'/ContactsDetail',query:{id:item.id} }}>详情</Link>
+                            <Link className="detailItem" to={{pathname:'/contacts/ContactsDetail',query:{id:item.id} }}>详情</Link>
                             <span className="deleteItem" onClick={ e=>(this._delItem(e,index)) }>删除</span>
                         </div>
                     </li>
