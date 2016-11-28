@@ -1,0 +1,33 @@
+﻿Merge branch 'master' into wechat
+
+Conflicts:
+	base/dist/index.html
+	base/dist/index_bundle.js
+	base/src/components/Contacts/Contacts.js
+	base/src/components/Home/Home.js
+	base/src/components/Login/Login.js
+	base/src/components/Page/Page.js
+	base/src/components/Repos/Repos.js
+	base/src/index.js
+	base/src/sass/widget/common/_routerTransition.scss
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch wechat
+# Your branch is up-to-date with 'origin/wechat'.
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	modified:   base/dist/index.html
+#	new file:   base/dist/index_bundle.js
+#	modified:   base/package.json
+#	modified:   base/src/index.js
+#
+
