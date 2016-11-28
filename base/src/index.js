@@ -43,7 +43,7 @@ ReactDOM.render(
       </Route>
       <Route path="contacts" component={Contacts} />
       <Route path="contacts/ContactsDetail" component={ContactsDetail} />
-      <Route path="about" component={About} onEnter={redirectToLogin} />
+      <Route path="about" component={About} onEnter={redirectToLogin} onEnter={redirectToLogin}/>
       <Route path="login" component={Login} />
     </Route>
     <Route path="*" component={PageNotFound} />
@@ -55,4 +55,3 @@ ReactDOM.render(
 // require('normalize.css/normalize.css');
 import 'weui';
 require('./sass/index.scss');
-
