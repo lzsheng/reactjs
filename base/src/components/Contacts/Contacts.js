@@ -66,7 +66,7 @@ class Contacts extends Component {
   }
   render() {
     return (
-      <Page hasFooter="true">
+      <Page hasFooter={true}>
       <div className="contacts">
         <ul className="formList">
           <li className="item"><label>姓名:<input id="name" type="text" className="coolInput" onChange={e=>this._change(e)} value={this.state.entry.name}/></label></li>

@@ -43,7 +43,11 @@ ReactDOM.render(
       </Route>
       <Route path="contacts" component={Contacts} />
       <Route path="contacts/ContactsDetail" component={ContactsDetail} />
+<<<<<<< HEAD
+      <Route path="about" component={About} onEnter={redirectToLogin} onEnter={redirectToLogin}/>
+=======
       <Route path="about" component={About} onEnter={redirectToLogin} />
+>>>>>>> master
       <Route path="login" component={Login} />
     </Route>
     <Route path="*" component={PageNotFound} />
@@ -54,5 +58,9 @@ ReactDOM.render(
 /*样式*/
 // require('normalize.css/normalize.css');
 import 'weui';
+<<<<<<< HEAD
+require('./sass/index.scss');
+=======
 require('./sass/index.scss');
 
+>>>>>>> master

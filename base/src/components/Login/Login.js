@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Page from '../Page';
+import {Button,Toast} from 'react-weui';
 import { withRouter } from 'react-router';
 import auth from '../../Until/auth';
 
@@ -7,17 +8,28 @@ class Login extends Component {
   constructor(props) {
     super(props);
     console.log("Login",props);
-    this.state = {}
+    this.state = {
+      error:false,
+      btnDisabled : true
+    }
+  }
+  handleChange(event) {
+    let btnDisabled = event.target.value?false:true;
+    this.setState({btnDisabled:btnDisabled});
   }
   handleSubmit(event) {
     event.preventDefault()
 
-    const userName = this.refs.userName.value
-    const passWord = this.refs.passWord.value
+    const userName = "lzsheng"
+    const passWord = this._inputPWD.value
+    console.log(passWord);
 
     auth.login(userName, passWord, (loggedIn) => {
       if (!loggedIn){
-        return this.setState({ error: true })
+        setTimeout(()=>{
+          this.setState({ error: false });
+        },3000);
+        return this.setState({ error: true });
       }
 
       const { location } = this.props
@@ -34,16 +46,22 @@ class Login extends Component {
     return (
       <Page transition="B">
       <form className="login" onSubmit={ (e)=>(this.handleSubmit(e)) }>
-        <h2>Login</h2>
-        <div>User Name</div>
-        <div><input ref="userName" type="text" className="coolInput" placeholder="请键入用户名" defaultValue="lzsheng"/></div>
-        <div>Pass Word</div>
-        <div><input ref="passWord" type="password" className="coolInput" placeholder="请键入密码:123456"/></div>
-        <div><button type="submit">login</button></div>
-        {this.state.error && (
-          <p>错了错了,账号是:lzsheng,密码123456</p>
-        )}
+        <img src="http://img2.imgtn.bdimg.com/it/u=740050625,2532960297&fm=206&gp=0.jpg" />
+        <h5>+86 131 4441 4163</h5>
+        <label htmlFor="password">
+          密码
+          <input onChange={(e)=>(this.handleChange(e))} ref={(el)=>( this._inputPWD = el )} type="password" placeholder="请键入密码:123456"/>
+        </label>
+        {
+          this.state.btnDisabled
+          ?
+          <Button type="primary" disabled>登录</Button>
+          :
+          <Button type="primary">登录</Button>
+        }
+        <p>登录遇到问题?</p>
       </form>
+      <Toast icon="warn" iconSize="large" show={this.state.error}>密码123456</Toast>
       </Page>
     );
   }
