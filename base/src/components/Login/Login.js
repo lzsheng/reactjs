@@ -61,7 +61,7 @@ class Login extends Component {
         }
         <p>登录遇到问题?</p>
       </form>
-      <Toast icon="warn" iconSize="large" show={this.state.error}>密码123456</Toast>
+      <Toast icon="warn" iconSize="large" show={this.state.error}>password:123456</Toast>
       </Page>
     );
   }
