@@ -1,7 +1,7 @@
 //"进入的页面"直接切换到"离开的页面"动画(等于无动画)
 .pageTranstion-A{
   &.pageAnimation-enter {
-      z-index: 1024;
+      z-index: 1023;
       opacity: 1;
       transform: translate3d(0, 0, 0);
       transition: all 0.3s ease;
@@ -25,6 +25,7 @@
 //"进入的页面"覆盖"离开的页面"动画
 .pageTranstion-B{
   &.pageAnimation-enter {
+      z-index: 1024;
       opacity: 1;
       transform: translate3d(100%, 0, 0);
       transition: all 0.5s ease;
