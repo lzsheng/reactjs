@@ -3,7 +3,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 const routerAnimation = {
   transitionName : "pageAnimation",//"进入的页面"覆盖"离开的页面"动画
-  timeout : 500,//切换时长
+  timeout : 2000,//切换时长
 }
 
 const App = (props) => {
