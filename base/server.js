@@ -3,7 +3,7 @@ const WebpackDevServer = require('webpack-dev-server');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const ExtractTextPluginConfig = new ExtractTextPlugin('style.css?v=[contenthash]');
+// const ExtractTextPluginConfig = new ExtractTextPlugin('style.css?v=[contenthash]');
 
 const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
     template: `${__dirname}/src/index.html`,
@@ -35,12 +35,19 @@ var config_hot = {
             test: /\.js$/,
             exclude: /node_modules/,
             loader: 'react-hot-loader!babel-loader',
-        }, 
+        },
+        {
+            //在style中输出css
+            test: /\.(css|scss)$/,
+            loader: 'style-loader!css-loader!autoprefixer?browsers=last 8 version!sass-loader'
+        },
+        /*
         {
             //输出独立的css文件
             test: /\.(css|scss)$/,
             loader: ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader?{browsers:["last 8 version"]}!sass-loader')
         },
+        */
         {
             test: /\.(png|jpg)$/,
             loader: 'url?limit=2500'//url-loader
@@ -48,7 +55,7 @@ var config_hot = {
         ],
     },
     plugins: [
-        ExtractTextPluginConfig,//输出独立的css文件
+        // ExtractTextPluginConfig,//输出独立的css文件
         HTMLWebpackPluginConfig,
         new webpack.HotModuleReplacementPlugin()
     ],
