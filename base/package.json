@@ -4,7 +4,10 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "webpack-dev-server --colors --inline --content-base ."
+    "startDevHot": "node server.js --colors --inline",
+    "startDev": "webpack-dev-server --colors --inline --content-base",
+    "buildDev": "webpack --progress --profile --colors --config webpack.config.js",
+    "build": "webpack --progress --profile --colors --config webpack.production.config.js"
   },
   "author": "kdchang",
   "license": "MIT",
@@ -38,6 +41,7 @@
     "normalize.css": "^5.0.0",
     "postcss-load": "^0.1.6",
     "react-addons-css-transition-group": "^15.3.2",
+    "react-hot-loader": "^1.3.1",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
