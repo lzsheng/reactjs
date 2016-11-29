@@ -1,23 +1,24 @@
 //"进入的页面"直接切换到"离开的页面"动画(等于无动画)
 .pageTranstion-A{
   &.pageAnimation-enter {
-      z-index: 1023;
+      z-index: 1024;
       opacity: 1;
-      transform: translate3d(0, 0, 0);
-      transition: all 0.3s ease;
+      transform: translate3d(100%, 0, 0);
+      transition: all 0.5s ease;
       &.pageAnimation-enter-active {
-          transform: translate3d(0, 0, 0);
           opacity: 1;
+          transform: translate3d(0, 0, 0);
       }
   }
 
   &.pageAnimation-leave {
+      z-index: 1024;
       opacity: 1;
       transform: translate3d(0, 0, 0);
-      transition: all 0.4s ease;
+      transition: all 0.5s ease;
       &.pageAnimation-leave-active {
-          transform: translate3d(0, 0, 0);
-          opacity: 1;
+          opacity: 0.01;
+          transform: translate3d(100%, 0, 0);
       }
   }
 }
