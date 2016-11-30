@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
+import FastClick from 'fastclick';
 import App from './components/App';
 import Login from './components/Login';
 import Home from './components/Home';
@@ -33,6 +34,10 @@ class PageNotFound extends React.Component {
     )
   }
 }
+
+window.addEventListener('load',()=>{
+  FastClick.attach(document.body);
+});
 
 ReactDOM.render(
   <Router history={hashHistory}>
