@@ -12,9 +12,7 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 
 module.exports = {
     entry: {
-        js:[
-            './src/index.js'
-        ]
+        js:['./src/index.js']
     },
     output: {
         path: `${__dirname}/dist`,
@@ -51,13 +49,20 @@ module.exports = {
         }
         ],
     },
-    devtool: "source-map",
+    // devtool: "source-map",//是否打包出.map文件
     devServer: {
         inline: true,
         port: 8008,
     },
     plugins: [
         ExtractTextPluginConfig,//输出独立的css文件
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            },
+            // sourceMap: true,
+            mangle: true
+        }),//压缩JS,CSS
         HTMLWebpackPluginConfig,
     ],
 };
