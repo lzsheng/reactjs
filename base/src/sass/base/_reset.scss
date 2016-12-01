@@ -36,4 +36,4 @@ a{
     box-sizing:border-box;
     -webkit-tap-highlight-color: transparent;
 }
-input,textarea{-webkit-appearance:none;border-radius: 0}
+input[type="tel"],input[type="text"],input[type="password"],textarea{-webkit-appearance:none;border-radius: 0}
