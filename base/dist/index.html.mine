@@ -18,5 +18,5 @@
 </head>
 <body ontouchstart="">
   <div id="app" class="container"></div>
-</body>
+<script type="text/javascript" src="index.js?v=d5c7d4efb66a9f52bef1"></script></body>
 </html>

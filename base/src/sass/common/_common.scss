@@ -1,4 +1,4 @@
-@import '../../base/_fn';
+@import '../base/_fn';
 
 @for $i from 5 through 15{
     $tmp : $i * 2;
@@ -54,47 +54,3 @@
 .ellipsisLn3{
     @include ellipsisLn(3);
 }
-.coolInput{
-    border:1px solid #f5f5f5;
-    background-color: #fff;
-    color: #000;
-    -webkit-appearance: none;
-    outline: deepskyblue;
-    border-radius: 5px;
-    transition: all 1s;
-    &:focus{
-        background-color: black;
-        color: #fff;
-    }
-}
-
-// @for $i from 1 through 5{
-//     $tmp : $i * 2;
-//     .mT#{$tmp} {
-//         margin-top: #{$tmp}px;
-//     }
-//     .mR#{$tmp} {
-//         margin-right: #{$tmp}px;
-//     }
-//     .mB#{$tmp} {
-//         margin-bottom: #{$tmp}px;
-//     }
-//     .mL#{$tmp} {
-//         margin-left: #{$tmp}px;
-//     }
-// }
-// @for $i from 1 through 5{
-//     $tmp : $i * 2;
-//     .pT#{$tmp} {
-//         padding-top: #{$tmp}px;
-//     }
-//     .pR#{$tmp} {
-//         padding-right: #{$tmp}px;
-//     }
-//     .pB#{$tmp} {
-//         padding-bottom: #{$tmp}px;
-//     }
-//     .pL#{$tmp} {
-//         padding-left: #{$tmp}px;
-//     }
-// }

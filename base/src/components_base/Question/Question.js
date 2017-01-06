@@ -9,8 +9,7 @@ import storeKey from '../../StoreKey';
 const paqDataArr_random_StoreKEY = storeKey.paqDataArr_random;
 const paqDataArr_random_Copy_StoreKEY = storeKey.paqDataArr_random_Copy;
 const userPassNum_StoreKEY = storeKey.userPassNum;
-
-const PASSNUM = 3;//系统限制用户必须答题多少题
+const PASSNUM = 3;//系统限制用户必须答对多少题
 
 //如果用户已经通过了,直接跳转到下一个游戏项目
 let userPass = function(){
@@ -47,7 +46,7 @@ class Question extends React.Component {
     this.initData = store.get(paqDataArr_random_StoreKEY)||store.get(paqDataArr_random_Copy_StoreKEY);
     this._disabledBtnTimer = this._disabledBtnTimer.bind(this);
     this._clearStore = this._clearStore.bind(this);
-    let userPassNum = store.get(userPassNum_StoreKEY) ? store.get(userPassNum_StoreKEY) : 0 ;//更新题目
+    let userPassNum = store.get(userPassNum_StoreKEY) ? store.get(userPassNum_StoreKEY) : 0 ;//用户已经答对了多少题
     this.state = {
       data:this.initData.shift(),
       btnTex:"下一题",
@@ -89,22 +88,18 @@ class Question extends React.Component {
     store.set(paqDataArr_random_StoreKEY,this.initData);//更新题目
   }
 
-  checkResult(e,index){
+  checkResult(e,value){
 
-    let _arr = [...this.state.userCheck];//复制数组
-    let isRepeat = this.state.userCheck.findIndex( (value)=>(value == index) );//判断userCheck里,是否已经有该index的数据了,如果有则返回该数据的位置,如果找不到该index匹配的数据则返回-1;防止数据重复
-    if(e.target.checked){
-      if( isRepeat == -1 ){
-        _arr.push(index);
-        _arr.sort();//排序
-        this.setState({userCheck:_arr});
-      }
-    }else{
-      if ( isRepeat != -1 ) {
-        _arr.splice(isRepeat,1);//删除匹配的Index数据
-        this.setState({userCheck:_arr});
-      }
+    let _arr = [value,...this.state.userCheck];//合并数据
+    let _set = new Set(_arr);//利用Set实现数组去重
+    if( !e.target.checked ){
+      //如果是取消选中,则去除value值
+      _set.delete(value);
     }
+    _arr = Array.from(_set);//Set类型转为Array类型
+    _arr.sort();//排序
+    console.log(_arr);
+    this.setState({userCheck:_arr});
 
   }
 
@@ -115,7 +110,7 @@ class Question extends React.Component {
     this.timer = setTimeout(()=>{
       this.setState({disableBtn:false});
       clearTimeout(this.timer);
-    }, this.state.timeout);
+    }, 1000);
 
   }
 
@@ -127,9 +122,11 @@ class Question extends React.Component {
   }
 
   render() {
+    console.log(this.state.data);
     let title = this.state.data.title;
     let id = this.state.data.id;
     let options = this.state.data.options;
+
     return (
       <div>
         <p>题目id:{title}</p>

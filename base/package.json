@@ -1,5 +1,5 @@
 {
-  "name": "react-router-example",
+  "name": "react-react-router-es6-sass",
   "version": "1.0.0",
   "description": "",
   "main": "webpack.config.js",
@@ -7,9 +7,9 @@
     "startDevHot": "node server.js --colors --inline",
     "startDev": "webpack-dev-server --colors --inline --content-base",
     "buildDev": "webpack --progress --profile --colors --config webpack.config.js",
-    "build": "webpack --progress --profile --colors --config webpack.production.config.js"
+    "build": "webpack --progress --profile --colors --config webpack.production.config.js -w"
   },
-  "author": "kdchang",
+  "author": "lzsheng",
   "license": "MIT",
   "dependencies": {
     "react": "^15.3.1",

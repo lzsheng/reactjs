@@ -31,21 +31,22 @@ module.exports = {
             exclude: /node_modules/,
             loader: 'babel-loader',
         }, 
-        /*
+        
         {
             //在style中输出css
             test: /\.(css|scss)$/,
             loader: 'style-loader!css-loader!autoprefixer?browsers=last 8 version!sass-loader'
         },
-        */
+        /*
         {
             //输出独立的css文件
             test: /\.(css|scss)$/,
             loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap!autoprefixer-loader?{browsers:["last 8 version"]}!sass-loader?sourceMap')
         },
+        */
         {
             test: /\.(png|jpg)$/,
-            loader: 'url?limit=2500'//url-loader
+            loader: 'url?limit=4500'//url-loader
         }
         ],
     },
@@ -55,7 +56,7 @@ module.exports = {
         port: 8008,
     },
     plugins: [
-        ExtractTextPluginConfig,//输出独立的css文件
+        // ExtractTextPluginConfig,//输出独立的css文件
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
