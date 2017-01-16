@@ -1,5 +1,4 @@
 import React from 'react';
-import until from '../../until';
 
 class Alert extends React.Component {
 

@@ -5,14 +5,15 @@ import until from '../../until';
 import ProgressBar from './ProgressBar';//进度条
 import shakeEvent from './shakeEvent';
 
-import img_yysBg from '../../img/yys_bg.jpg';
-import img_yysS from '../../img/yys_s.png';
-import img_sjy from '../../img/sjy.png';
+import img_yysBg from 'srcPath/img/yys_bg.jpg';
+import img_yysS from 'srcPath/img/yys_s.png';
+import img_sjy from 'srcPath/img/sjy.png';
 
-import img_s1 from '../../img/s1.png';
-import img_s2 from '../../img/s2.png';
-import img_s3 from '../../img/s3.png';
-import img_s4 from '../../img/s4.png';
+import img_s1 from 'srcPath/img/s1.png';
+import img_s2 from 'srcPath/img/s2.png';
+import img_s3 from 'srcPath/img/s3.png';
+import img_s4 from 'srcPath/img/s4.png';
+
 
 class Shake extends React.Component {
 
@@ -93,7 +94,9 @@ class Shake extends React.Component {
           <embed height="0" width="0" src="shake.wav" />
         </audio>
         {/*背景*/}
+        
         <img src={img_yysBg} className="yys_Bg" />
+        
         {/*进度条*/}
         <div className="font">
           <p>赶紧摇，前{this.state.allDrawNumber}名就可以上墙哦！</p>
