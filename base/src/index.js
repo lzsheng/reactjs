@@ -14,8 +14,8 @@ window.addEventListener('load',()=>{
 
 ReactDOM.render(
   <Router history={hashHistory}>
-    <Route path="/">
-      <IndexRoute component={PersonalProfile}/>
+    <Route path="/" component={PersonalProfile}>
+    
     </Route>
   </Router>,
   document.getElementById('app'));

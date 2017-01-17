@@ -1,6 +1,7 @@
 @import '../base/_fn';
 
 $offsetLeft: _(40);
+$borderColor: #5e5e5f;
 
 img{
     @include no_select();
@@ -10,7 +11,7 @@ img{
     position: relative;
     height: 100%;
     background-color: #162026;
-    color:#fff;
+    color:$baseFontColor;
     .pageTitle{
         position: relative;
         z-index: 2;
@@ -27,22 +28,61 @@ img{
         background-color: #263137;
         width: 100%;
         height: _(200);
-        border-radius: 30%;
+        border-radius: 27%;
     }
 }
 
 .baseInfo{
     display: flex;
-    padding-left:$offsetLeft;
-    padding-right:$offsetLeft;
+    height: _(296);
+    margin-top: _(20);
+    margin-left:$offsetLeft;
+    margin-right:$offsetLeft;
+    color:$baseFontColor;
+    @include borderBottomAfter($borderColor);
     .leftBox{
         img{
             width: _(246);
             height:  _(246);
+            border: 1px solid #7f6d55;
+        }
+        .personalName{
+            text-align: center;
+            font-size: _(30);
         }
     }
     .rightBox{
         flex: 1;
         margin-left: _(30);
+        font-size: _(28);
+        .rightBox-top{
+            .cell{
+                padding:_(2) 0;
+            }
+        }
+        .rightBox-bottom{
+            @include borderTopBefore($borderColor);
+            margin-top:_(5);
+            padding-top:_(15);
+            .cell-l{
+                .lightLine{
+                    display: block;
+                    width:_(10);
+                    background-color: #2b941f;
+                    font-size: 0.9em;
+                    margin-right: _(8);
+                }
+            }
+            .skill{
+                .cell{
+                    padding:_(5) 0;
+                }
+            }
+            .icon-linkedin{
+                width: _(96);
+                height:  _(96);
+                margin-right:_(16);
+            }
+        }
     }
 }
