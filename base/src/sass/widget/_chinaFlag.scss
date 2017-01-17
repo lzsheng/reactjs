@@ -1,0 +1,45 @@
+@import '../base/_fn';
+
+//中国国旗
+.chinaFlag {
+    width: _(288);
+    height: _(192);
+    background: #FF0000;
+    position: relative;
+    color: #FFFF00;
+
+    div {
+        display: block;
+        position: absolute;
+    }
+
+    .chinaFlag_d1 {
+        font-size: _(72);
+        top: _(20);
+        left: _(20);
+    }
+
+    .chinaFlag_d2 {
+        font-size: _(16);
+        top: _(10);
+        left: _(100);
+    }
+
+    .chinaFlag_d3 {
+        font-size: _(16);
+        top: _(35);
+        left: _(120);
+    }
+
+    .chinaFlag_d4 {
+        font-size: _(16);
+        top: _(70);
+        left: _(120);
+    }
+
+    .chinaFlag_d5 {
+        font-size: _(16);
+        top: _(95);
+        left: _(100);
+    }
+}

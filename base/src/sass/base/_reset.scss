@@ -2,11 +2,11 @@
 html,body,.container{
     height: 100%;
     background-color: #f8f8f8;
+    max-width: $maxWidth;
+    margin: 0 auto;
 }
 body{
     font-family: $baseFont;
-    max-width: $maxWidth;
-    margin: 0 auto;
     overflow-x: hidden;
     font-size: $baseFontSize;
 }
@@ -21,12 +21,12 @@ a{
 }
 
 .clearfix:after {
-        clear: both;
-        content: '.';
-        display: block;
-        height: 0;
-        line-height: 0;
-        overflow: hidden;
+    clear: both;
+    content: '.';
+    display: block;
+    height: 0;
+    line-height: 0;
+    overflow: hidden;
 }
 *,:after,:before{
     margin:0;

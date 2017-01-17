@@ -1,17 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 import FastClick from 'fastclick';
-import Shake from './components/Shake';
+import PersonalProfile from './components/PersonalProfile';
+
+/*样式*/
+require('normalize.css/normalize.css');
+require('./sass/index.scss');
 
 window.addEventListener('load',()=>{
   FastClick.attach(document.body);
 });
 
-setTimeout(()=>{
-  ReactDOM.render(<Shake />,document.getElementById('app'));
-},100)
-
-/*样式*/
-// import 'weui';
-require('normalize.css/normalize.css');
-require('./sass/index.scss');
+ReactDOM.render(
+  <Router history={hashHistory}>
+    <Route path="/">
+      <IndexRoute component={PersonalProfile}/>
+    </Route>
+  </Router>,
+  document.getElementById('app'));

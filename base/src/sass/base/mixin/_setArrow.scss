@@ -1,10 +1,9 @@
-/* 箭头
-arrow($direction,$arrowsize,$color,$borderWidth);
-方向:direction
-箭头大小:arrowsize
-颜色:color
-箭头的边线大小:borderWidth
-*/
+//  箭头
+// arrow($direction,$arrowsize,$color,$borderWidth);
+// 方向:direction
+// 箭头大小:arrowsize
+// 颜色:color
+// 箭头的边线大小:borderWidth
 
 @import '../variable/_global';
 $arrowColor:$borderColor_default !default;

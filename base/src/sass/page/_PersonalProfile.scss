@@ -1,0 +1,48 @@
+@import '../base/_fn';
+
+$offsetLeft: _(40);
+
+img{
+    @include no_select();
+}
+
+.personal{
+    position: relative;
+    height: 100%;
+    background-color: #162026;
+    color:#fff;
+    .pageTitle{
+        position: relative;
+        z-index: 2;
+        font-size: _(40);
+        text-align: center;
+        padding-top: _(36);
+    }
+    &:before{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translateY(-70%);
+        background-color: #263137;
+        width: 100%;
+        height: _(200);
+        border-radius: 30%;
+    }
+}
+
+.baseInfo{
+    display: flex;
+    padding-left:$offsetLeft;
+    padding-right:$offsetLeft;
+    .leftBox{
+        img{
+            width: _(246);
+            height:  _(246);
+        }
+    }
+    .rightBox{
+        flex: 1;
+        margin-left: _(30);
+    }
+}
