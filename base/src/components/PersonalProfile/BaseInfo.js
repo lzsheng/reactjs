@@ -10,15 +10,15 @@ const BaseInfo = (props) => {
       <div className="rightBox">
         <div className="rightBox-top"> 
           <div className="cell">
-            <div className="cell-m">176cm</div>
-            <div className="cell-r">中国</div>
+            <div className="cell-m">本科</div>
+            <div className="cell-r">广东</div>
           </div>
           <div className="cell">
-            <div className="cell-m">60kg</div>
+            <div className="cell-m">1992.02</div>
             <div className="cell-r">广州</div>
           </div>
           <div className="cell">
-            <div className="cell-m">1992.02.08</div>
+            <div className="cell-m"><a className="eMail" href="mailto:372959130@qq.com">372959130@qq.com</a></div>
           </div>
         </div>
         <div className="rightBox-bottom">
@@ -36,17 +36,17 @@ const BaseInfo = (props) => {
               <div className="cell">
                 <div className="cell-l"><i className="lightLine">&nbsp;</i></div>
                 <div className="cell-m">html</div>
-                <div className="cell-r">80</div>
+                <div className="cell-r">90</div>
               </div>
               <div className="cell">
                 <div className="cell-l"><i className="lightLine">&nbsp;</i></div>
                 <div className="cell-m">css</div>
-                <div className="cell-r">85</div>
+                <div className="cell-r">90</div>
               </div>
               <div className="cell">
                 <div className="cell-l"><i className="lightLine">&nbsp;</i></div>
                 <div className="cell-m">javascript</div>
-                <div className="cell-r">80</div>
+                <div className="cell-r">87</div>
               </div>
               </div>
           </div>
@@ -64,4 +64,4 @@ const BaseInfo2 = (props) => {
     )
 };
 
-export default BaseInfo2;
+export default BaseInfo;

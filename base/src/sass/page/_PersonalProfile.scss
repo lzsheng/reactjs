@@ -8,6 +8,11 @@ img{
 }
 
 .personal{
+
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+
     position: relative;
     height: 100%;
     background-color: #162026;
@@ -39,7 +44,7 @@ img{
     margin-left:$offsetLeft;
     margin-right:$offsetLeft;
     color:$baseFontColor;
-    @include borderBottomAfter($borderColor);
+    // @include borderBottomAfter($borderColor);
     .leftBox{
         img{
             width: _(246);
@@ -58,6 +63,9 @@ img{
         .rightBox-top{
             .cell{
                 padding:_(2) 0;
+            }
+            .eMail{
+                color: $baseFontColor;
             }
         }
         .rightBox-bottom{
@@ -83,6 +91,75 @@ img{
                 height:  _(96);
                 margin-right:_(16);
             }
+        }
+    }
+}
+
+
+.tabButton-box{
+    padding-left:$offsetLeft;
+    height: _(60);
+    padding-top: _(10);
+    background-color: #192732;
+    display: flex;
+    font-size: _(28);
+    a{
+        color: #d8d8d8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right:_(10);
+        padding: 0 _(20);
+        border-radius: _(10);
+        border:1px solid #535861;
+        background: linear-gradient(top , rgb(124, 124, 124) 2% , rgb(86, 91, 101) 51%);
+        box-shadow: _(3) _(3) _(5) #111;
+        height: 90%;
+        &.tabActive{
+            color: $baseFontColor;
+            border:1px solid #111;
+            border-bottom: none;
+            border-top-left-radius: _(10);
+            border-top-right-radius: _(10);
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            background: linear-gradient(top , rgb(35, 49, 57) 21% , rgb(18, 34, 44) 28%);
+            box-shadow: none;
+            position: relative;
+            height: 100%;
+            &:after{
+                content:"";
+                display: block;
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                width: 80%;
+                height: _(5);
+                transform: translateX(-50%);
+                border-radius: 100%;
+                background: radial-gradient(center , circle cover , rgb(236, 204, 48) 8% , rgb(142, 142, 142) 87% , rgb(145, 145, 145) 100%);
+            }
+        }
+    }
+}
+
+.TabPanle_content{
+    margin-top: _(15);
+    background-color: #162026;
+    color: #e3e3e3;
+    font-size: _(28);
+    .TabPanle_content_title,.TabPanle_content_text{
+        padding:_(15) $offsetLeft;
+    }
+    .TabPanle_content_title{
+        font-weight: bold;
+    }
+    .TabPanle_content_text{
+        background-color: #192732;
+        font-size: _(24);
+        line-height: 1.5em;
+        .cell{
+            padding:_(5) 0;
         }
     }
 }
