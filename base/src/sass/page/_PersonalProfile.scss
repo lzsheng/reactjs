@@ -162,4 +162,15 @@ img{
             padding:_(5) 0;
         }
     }
+    .demoLink{
+        padding:_(3) 0;
+        a{
+            display: block;
+            text-align: right;
+            color: #3b98d0;
+            text-decoration: underline;
+            font-size: 1.1em;
+            text-decoration: 1px;
+        }
+    }
 }

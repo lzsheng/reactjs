@@ -54,3 +54,8 @@
 .ellipsisLn3{
     @include ellipsisLn(3);
 }
+
+//强制断句
+.freeLine{
+    @include text_wrap();
+}
