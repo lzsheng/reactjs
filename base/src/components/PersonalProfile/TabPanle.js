@@ -12,6 +12,17 @@ const TabButton = (props) => {
     )
 };
 
+const TabButton2 = (props) => {
+    //     /personal/:tabId
+    return (
+    <div className="tabButton-box">
+      <IndexLink to={{pathname:'/personal/tab1',query:{} }} activeClassName="tabActive">tab1</IndexLink>
+      <Link to={{pathname:'/personal/tab2',query:{} }} activeClassName="tabActive">tab2</Link>
+      <Link to={{pathname:'/personal/tab3',query:{} }} activeClassName="tabActive">tab3</Link>
+    </div>
+    )
+};
+
 const TabPanle_1 = (props) => {
     return (
     <div>
@@ -204,6 +215,24 @@ const TabPanle_3 = (props) => {
     )
 };
 
+
+//test
+const TabPanle_4 = (props) => {
+    return (
+      <div>
+        <div className="TabPanle_content">
+          <div className="TabPanle_content_title">title</div>
+          <div className="TabPanle_content_text">
+            <div className="cell">
+              <div className="cell-m">11</div>
+              <div className="cell-r">123231</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+}
+
 class TabPanle extends React.Component {
   constructor(props) {
     super(props);
@@ -227,9 +256,11 @@ class TabPanle extends React.Component {
         showPanle = <TabPanle_1 />;
     }
 
+    showPanle = <TabPanle_4 />;
+
     return (
       <div>
-        <TabButton />
+        <TabButton2 />
         {showPanle}
       </div>
     );
