@@ -63,8 +63,8 @@ module.exports = {
         },
         */
         {
-            test: /\.(png|jpg)$/,
-            loader: 'url?limit=4500'//url-loader
+            test: /\.(jpe?g|png|gif|svg)$/i,
+            loader: 'url-loader?limit=8192&name=[name].[ext]'
         }
         ],
     },

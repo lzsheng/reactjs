@@ -64,4 +64,4 @@ const BaseInfo2 = (props) => {
     )
 };
 
-export default BaseInfo2;
+export default BaseInfo;

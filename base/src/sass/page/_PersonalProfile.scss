@@ -3,6 +3,8 @@
 $offsetLeft: _(40);
 $borderColor: #5e5e5f;
 
+$lightenBg: #192732;//浅色背景
+
 img{
     @include no_select();
 }
@@ -100,7 +102,7 @@ img{
     padding-left:$offsetLeft;
     height: _(60);
     padding-top: _(10);
-    background-color: #192732;
+    background-color: $lightenBg;
     display: flex;
     font-size: _(28);
     a{
@@ -155,7 +157,7 @@ img{
         font-weight: bold;
     }
     .TabPanle_content_text{
-        background-color: #192732;
+        background-color: $lightenBg;
         font-size: _(24);
         line-height: 1.5em;
         .cell{
@@ -164,8 +166,10 @@ img{
     }
     .demoLink{
         padding:_(3) 0;
+        overflow: hidden;
         a{
-            display: block;
+            display: inline-block;
+            float: right;
             text-align: right;
             color: #3b98d0;
             text-decoration: underline;
@@ -173,4 +177,53 @@ img{
             text-decoration: 1px;
         }
     }
+    .arrow--top{
+        @include arrow('top',_(16),$borderColor_default,_(4));
+        top: 0px;
+        transition: all .3s;
+    }
+    .arrow--bottom{
+        @include arrow('bottom',_(16),$borderColor_default,_(4));
+        top: -2.5px;
+        transition: all .3s;
+    }
+    &.TabPanle_content--flexible{
+        border-bottom: 1px solid #192732;
+        &>.TabPanle_content_text{
+            padding: 0 $offsetLeft;
+            height: 0;
+            overflow: hidden;
+            transition: all .3s;
+            .TabPanle_content_title{
+                background-color: $lightenBg;
+                &:not(:first-child){
+                    @include borderTopAfter();
+                }
+            }
+        }
+        .text_offset{
+            text-indent: 2em;
+        }
+    }
+}
+
+html, body, .container{background-color: #333 !important;}
+#logo {
+  stroke-dasharray: 2.42777px, 231.77666px;
+  stroke-dashoffset: 0;
+  -webkit-animation: anim 1.6s linear infinite;
+}
+@-webkit-keyframes anim {
+  12% {
+    stroke-dasharray: 33.98873px, 231.77666px;
+    stroke-dashoffset: -26.70543px;
+  }
+  45% {
+    stroke-dasharray: 84.97183px, 231.77666px;
+    stroke-dashoffset: -84.97183px;
+  }
+  100% {
+    stroke-dasharray: 2.42777px, 231.77666px;
+    stroke-dashoffset: -240.34889px;
+  }
 }

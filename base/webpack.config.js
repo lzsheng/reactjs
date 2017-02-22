@@ -62,8 +62,8 @@ module.exports = {
         //     loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap!autoprefixer-loader?{browsers:["last 8 version"]}!sass-loader?sourceMap')
         // },
         {
-            test: /\.(png|jpg)$/,
-            loader: 'url?limit=4500'//url-loader
+            test: /\.(jpe?g|png|gif|svg)$/i,
+            loader: 'url-loader?limit=8192&name=[name].[ext]'
         }
         ],
     },

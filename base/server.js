@@ -67,8 +67,8 @@ var config_hot = {
         },
         */
         {
-            test: /\.(png|jpg)$/,
-            loader: 'url?limit=2500'//url-loader
+            test: /\.(jpe?g|png|gif|svg)$/i,
+            loader: 'url-loader?limit=8192&name=[name].[ext]'
         }
         ],
     },
