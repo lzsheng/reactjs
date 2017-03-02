@@ -1,5 +1,5 @@
 import React, {Component,PropTypes} from 'react';
-import { Link } from 'react-router';
+import { Link, withRouter } from 'react-router';
 /**
  * 显示记录的List
  */
@@ -7,7 +7,7 @@ import { Link } from 'react-router';
 class List extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
+    console.log("List",props);
     this.state = {
     };
   }
@@ -39,4 +39,4 @@ List.propTypes = {
   data: React.PropTypes.array.isRequired,
 };
 
-export default List;
+export default withRouter(List);
