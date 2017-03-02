@@ -2,7 +2,7 @@ import React from 'react';
 import Page from '../Page';
 
 const Repos = (props) => {
-  console.log(props);
+  console.log("Repos",props);
   return (  
     <Page hasFooter={true}>
     <div>

@@ -3,6 +3,7 @@ import React, {Component,PropTypes} from 'react';
 class Repo extends Component {
   constructor(props) {
     super(props);
+    console.log("Repo",props);
     this.state = {
       
     };

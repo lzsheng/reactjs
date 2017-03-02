@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { withRouter } from 'react-router';
 import $ from 'jquery';
 import auth from '../../Until/auth';
 
@@ -20,6 +19,7 @@ class About extends Component {
         }
         auth.logout(cb);
     }
+
     componentDidMount() {
         $.get(this.props.source||'https://api.github.com/users/lzsheng', (result) => {
             console.log(result);
@@ -32,7 +32,16 @@ class About extends Component {
               });
             }
         });
+        this.timer_About = setTimeout(()=>{
+            console.log("About-3000ms的setTimeout");
+        },3000)
     }
+
+    componentWillUnmount(){
+        console.log("清除About-3000ms的setTimeout");
+        clearTimeout(this.timer_About);
+    }
+
     render() {
         return (
           <div className="about">
@@ -44,4 +53,4 @@ class About extends Component {
     }
 }
 
-export default withRouter(About);
+export default About;

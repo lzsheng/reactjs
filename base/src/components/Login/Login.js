@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Page from '../Page';
 import {Button,Toast} from 'react-weui';
-import { withRouter } from 'react-router';
 import auth from '../../Until/auth';
 
 class Login extends Component {
@@ -67,6 +66,4 @@ class Login extends Component {
   }
 }
 
-//通过withRouter方法导出的模块,其props拥有router对象(react-router 2.x版本新增)
-//https://github.com/ReactTraining/react-router/blob/master/upgrade-guides/v2.4.0.md
-export default withRouter(Login)
+export default Login
