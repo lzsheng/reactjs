@@ -56,12 +56,4 @@ const BaseInfo = (props) => {
     )
 };
 
-const BaseInfo2 = (props) => {
-    return (
-    <div className="baseInfo">
-      用户基本信息
-    </div>
-    )
-};
-
 export default BaseInfo;

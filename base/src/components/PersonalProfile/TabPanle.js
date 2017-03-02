@@ -14,18 +14,6 @@ const TabButton = (props) => {
     )
 };
 
-const TabButton2 = (props) => {
-    //     /personal/:tabId
-    return (
-    <div className="tabButton-box">
-      <IndexLink to={{pathname:'/personal/tab1',query:{} }} activeClassName="tabActive">tab1</IndexLink>
-      <Link to={{pathname:'/personal/tab2',query:{} }} activeClassName="tabActive">tab2</Link>
-      <Link to={{pathname:'/personal/tab3',query:{} }} activeClassName="tabActive">tab3</Link>
-      <Link to={{pathname:'/personal/tab4',query:{} }} activeClassName="tabActive">tab4</Link>
-    </div>
-    )
-};
-
 const TabPanle_1 = (props) => {
     return (
     <div>
@@ -234,23 +222,23 @@ class TabPanle_4 extends React.Component {
             <div className="TabPanle_content">
               <div className="TabPanle_content_title">项目时间：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">2016-12 至 2017-01</div>
+                <div>2016-12 至 2017-01</div>
               </div>
               <div className="TabPanle_content_title">项目描述：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">该项目为广电运通2017年年会现场使用的抽奖系统，其中包括：微信端的摇摇树，现场大屏幕一、二等奖的3D抽奖系统（pc端）、现场大屏幕三等奖翻盘系统（pc端）</div>
+                <div>该项目为广电运通2017年年会现场使用的抽奖系统，其中包括：微信端的摇摇树，现场大屏幕一、二等奖的3D抽奖系统（pc端）、现场大屏幕三等奖翻盘系统（pc端）</div>
               </div>
               <div className="TabPanle_content_title">应用技术：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">react.js + three.js + es6 + webpack + sass + rem布局 + flexbox布局</div>
+                <div>react.js + three.js + es6 + webpack + sass + rem布局 + flexbox布局</div>
               </div>
               <div className="TabPanle_content_title">项目职责：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">1.框架选型</div>
-                <div className="text_offset">2.静态页面的制作，根据设计图和需求文档划分react组件，编写相应的组件和css</div>
-                <div className="text_offset">3.完成交互动画的制作</div>
-                <div className="text_offset">4.使用ajax与后台开发对接数据</div>
-                <div className="text_offset">5.使用webpack打包生产环境的生产包</div>
+                <div>1.框架选型</div>
+                <div>2.静态页面的制作，根据设计图和需求文档划分react组件，编写相应的组件和css</div>
+                <div>3.完成交互动画的制作</div>
+                <div>4.使用ajax与后台开发对接数据</div>
+                <div>5.使用webpack打包生产环境的生产包</div>
               </div>
             </div>
           </Accordion>
@@ -258,22 +246,22 @@ class TabPanle_4 extends React.Component {
             <div className="TabPanle_content">
               <div className="TabPanle_content_title">项目时间：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">2016-07 至 2016-10</div>
+                <div>2016-07 至 2016-10</div>
               </div>
               <div className="TabPanle_content_title">项目描述：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">该项目的数据来源于百度糯米，涉及的功能包括商品下单、根据地理位置查询店铺及商品、糯米号查询、订单查询、用户注册登陆等</div>
+                <div>该项目的数据来源于百度糯米，涉及的功能包括商品下单、根据地理位置查询店铺及商品、糯米号查询、订单查询、用户注册登陆等</div>
               </div>
               <div className="TabPanle_content_title">应用技术：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">zepto.js + sui mobile + require.js模块化 + gulp打包 + sass + flexbox布局 + 微信jssdk</div>
+                <div>zepto.js + sui mobile + require.js模块化 + gulp打包 + sass + flexbox布局 + 微信jssdk</div>
               </div>
               <div className="TabPanle_content_title">项目职责：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">1.框架选型</div>
-                <div className="text_offset">2.静态页面的制作，根据PSD文件制作静态页面(HTML、CSS、JS)</div>
-                <div className="text_offset">3.使用ajax与后台开发对接数据</div>
-                <div className="text_offset">4.使用gulp打包生产环境的生产包</div>
+                <div>1.框架选型</div>
+                <div>2.静态页面的制作，根据PSD文件制作静态页面(HTML、CSS、JS)</div>
+                <div>3.使用ajax与后台开发对接数据</div>
+                <div>4.使用gulp打包生产环境的生产包</div>
               </div>
             </div>
           </Accordion>
@@ -281,23 +269,23 @@ class TabPanle_4 extends React.Component {
             <div className="TabPanle_content">
               <div className="TabPanle_content_title">项目时间：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">2016-04 至 2016-12</div>
+                <div>2016-04 至 2016-12</div>
               </div>
               <div className="TabPanle_content_title">项目描述：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">该项目为公司对外提供的抽奖游戏平台，其中的抽奖游戏包括：大转盘、摇一摇、母亲节贺卡等</div>
+                <div>该项目为公司对外提供的抽奖游戏平台，其中的抽奖游戏包括：大转盘、摇一摇、母亲节贺卡等</div>
               </div>
               <div className="TabPanle_content_title">应用技术：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">jquery.js + require.js模块化 + gulp打包 + sass + rem布局 + flexbox布局</div>
+                <div>jquery.js + require.js模块化 + gulp打包 + sass + rem布局 + flexbox布局</div>
               </div>
               <div className="TabPanle_content_title">项目职责：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">1.框架选型</div>
-                <div className="text_offset">2.静态页面的制作，根据PSD文件制作静态页面(HTML、CSS、JS)</div>
-                <div className="text_offset">3.完成交互动画的制作</div>
-                <div className="text_offset">4.使用ajax与后台开发对接数据</div>
-                <div className="text_offset">5.使用gulp打包生产环境的生产包</div>
+                <div>1.框架选型</div>
+                <div>2.静态页面的制作，根据PSD文件制作静态页面(HTML、CSS、JS)</div>
+                <div>3.完成交互动画的制作</div>
+                <div>4.使用ajax与后台开发对接数据</div>
+                <div>5.使用gulp打包生产环境的生产包</div>
               </div>
             </div>
           </Accordion>
@@ -305,22 +293,22 @@ class TabPanle_4 extends React.Component {
             <div className="TabPanle_content">
               <div className="TabPanle_content_title">项目时间：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">2016-01 至 2016-04</div>
+                <div>2016-01 至 2016-04</div>
               </div>
               <div className="TabPanle_content_title">项目描述：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">河北银行微信公众号，涉及查询余额、绑定银行卡、贷款预约、附近网点排队取号、银行社区模版、大转盘、摇一摇抽奖等业务</div>
+                <div>河北银行微信公众号，涉及查询余额、绑定银行卡、贷款预约、附近网点排队取号、银行社区模版、大转盘、摇一摇抽奖等业务</div>
               </div>
               <div className="TabPanle_content_title">应用技术：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">jquery.js + sass + 微信jssdk</div>
+                <div>jquery.js + sass + 微信jssdk</div>
               </div>
               <div className="TabPanle_content_title">项目职责：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">1.框架选型</div>
-                <div className="text_offset">2.静态页面的制作，根据PSD文件制作静态页面(HTML、CSS、JS)</div>
-                <div className="text_offset">3.使用ajax与后台开发对接数据</div>
-                <div className="text_offset">4.使用jssdk调用微信支付，分享等功能</div>
+                <div>1.框架选型</div>
+                <div>2.静态页面的制作，根据PSD文件制作静态页面(HTML、CSS、JS)</div>
+                <div>3.使用ajax与后台开发对接数据</div>
+                <div>4.使用jssdk调用微信支付，分享等功能</div>
               </div>
             </div>
           </Accordion>
@@ -328,22 +316,22 @@ class TabPanle_4 extends React.Component {
             <div className="TabPanle_content">
               <div className="TabPanle_content_title">项目时间：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">2015-11 至 2016-01</div>
+                <div>2015-11 至 2016-01</div>
               </div>
               <div className="TabPanle_content_title">项目描述：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">该项目主要面对的客户为雅士利、蒙牛集团集团员工购买其集团商品的平台，涉及商品下单、物流查询、订单查询、在线支付、会员积分、返现、优惠券等流程</div>
+                <div>该项目主要面对的客户为雅士利、蒙牛集团集团员工购买其集团商品的平台，涉及商品下单、物流查询、订单查询、在线支付、会员积分、返现、优惠券等流程</div>
               </div>
               <div className="TabPanle_content_title">应用技术：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">jquery.js + jquery ui + sass</div>
+                <div>jquery.js + jquery ui + sass</div>
               </div>
               <div className="TabPanle_content_title">项目职责：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">1.框架选型</div>
-                <div className="text_offset">2.静态页面的制作，根据PSD文件制作静态页面(HTML、CSS、JS)</div>
-                <div className="text_offset">3.使用ajax与后台开发对接数据</div>
-                <div className="text_offset">4.使用jssdk调用微信支付</div>
+                <div>1.框架选型</div>
+                <div>2.静态页面的制作，根据PSD文件制作静态页面(HTML、CSS、JS)</div>
+                <div>3.使用ajax与后台开发对接数据</div>
+                <div>4.使用jssdk调用微信支付</div>
               </div>
             </div>
           </Accordion>
@@ -351,23 +339,23 @@ class TabPanle_4 extends React.Component {
             <div className="TabPanle_content">
               <div className="TabPanle_content_title">项目时间：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">2015-6 至 2015-11</div>
+                <div>2015-6 至 2015-11</div>
               </div>
               <div className="TabPanle_content_title">项目描述：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">该项目主要处理批发商与供货商之间的订货业务，涉及商品下单、物流查询、订单查询、在线支付、业务员审核订单等流程</div>
+                <div>该项目主要处理批发商与供货商之间的订货业务，涉及商品下单、物流查询、订单查询、在线支付、业务员审核订单等流程</div>
               </div>
               <div className="TabPanle_content_title">应用技术：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">zepto.js + GMU UI + sass</div>
+                <div>zepto.js + GMU UI + sass</div>
               </div>
               <div className="TabPanle_content_title">项目职责：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">1.框架选型</div>
-                <div className="text_offset">2.静态页面的制作，根据PSD文件制作静态页面(HTML、CSS、JS)</div>
-                <div className="text_offset">3.使用ajax与后台开发对接数据</div>
-                <div className="text_offset">4.使用jssdk调用微信支付，分享等功能</div>
-                <div className="text_offset">5.抽取公用代码，压缩代码等</div>
+                <div>1.框架选型</div>
+                <div>2.静态页面的制作，根据PSD文件制作静态页面(HTML、CSS、JS)</div>
+                <div>3.使用ajax与后台开发对接数据</div>
+                <div>4.使用jssdk调用微信支付，分享等功能</div>
+                <div>5.抽取公用代码，压缩代码等</div>
               </div>
             </div>
           </Accordion>
@@ -375,22 +363,22 @@ class TabPanle_4 extends React.Component {
             <div className="TabPanle_content">
               <div className="TabPanle_content_title">项目时间：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">2015-3 至 2015-6</div>
+                <div>2015-3 至 2015-6</div>
               </div>
               <div className="TabPanle_content_title">项目描述：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">集成B2B,O2O多重商业模式的电子商城项目，有PC端和移动端的商城</div>
+                <div>集成B2B,O2O多重商业模式的电子商城项目，有PC端和移动端的商城</div>
               </div>
               <div className="TabPanle_content_title">应用技术：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">zepto.js + sea.js + GMU UI</div>
+                <div>zepto.js + sea.js + GMU UI</div>
               </div>
               <div className="TabPanle_content_title">项目职责：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">1.修复因浏览器版本不同而引起的兼容性问题，修复已知bug</div>
-                <div className="text_offset">2.按新需求编写与添加JS模块组件（基于sea.js模块化js）</div>
-                <div className="text_offset">3.静态页面的制作，根据PSD文件制作静态页面(HTML、CSS、JS) </div>
-                <div className="text_offset">4.使用ajax与后台开发对接数据</div>
+                <div>1.修复因浏览器版本不同而引起的兼容性问题，修复已知bug</div>
+                <div>2.按新需求编写与添加JS模块组件（基于sea.js模块化js）</div>
+                <div>3.静态页面的制作，根据PSD文件制作静态页面(HTML、CSS、JS) </div>
+                <div>4.使用ajax与后台开发对接数据</div>
               </div>
             </div>
           </Accordion>
@@ -398,21 +386,21 @@ class TabPanle_4 extends React.Component {
             <div className="TabPanle_content">
               <div className="TabPanle_content_title">项目时间：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">2014-8 至 2015-1</div>
+                <div>2014-8 至 2015-1</div>
               </div>
               <div className="TabPanle_content_title">项目描述：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">该项目是基于智能wifi为载体的电商系统，用户连上wifi后可以看到该商家的商家信息、商品、广告等等。商品可以进行评价、下单等操作</div>
+                <div>该项目是基于智能wifi为载体的电商系统，用户连上wifi后可以看到该商家的商家信息、商品、广告等等。商品可以进行评价、下单等操作</div>
               </div>
               <div className="TabPanle_content_title">应用技术：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">jquery.js + dojo.js</div>
+                <div>jquery.js + dojo.js</div>
               </div>
               <div className="TabPanle_content_title">项目职责：</div>
               <div className="TabPanle_content_text">
-                <div className="text_offset">1.设计界面风格和页面布局</div>
-                <div className="text_offset">2.根据设计图制作静态界面，并通过javascript+ajax+jquery完成用户的交互操作</div>
-                <div className="text_offset">3.与后台开发配合对接数据接口</div>
+                <div>1.设计界面风格和页面布局</div>
+                <div>2.根据设计图制作静态界面，并通过javascript+ajax+jquery完成用户的交互操作</div>
+                <div>3.与后台开发配合对接数据接口</div>
               </div>
             </div>
           </Accordion>
