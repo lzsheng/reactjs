@@ -10,8 +10,7 @@ class Contacts extends Component {
       entry:{
         name:"",
         age:"",
-        tel:"",
-        id:""
+        tel:""
       },
       history: Storage.get() || []
     };
@@ -32,25 +31,29 @@ class Contacts extends Component {
   }
   _change(e){
     //输入框输入
-    let obj = {};
-    for(let key in this.state.entry){
-      obj[key] = this.state.entry[key];
-    }
-    obj[e.target.id] = e.target.value;//state的key对应id的值
-    obj.id = Date.parse(new Date());
-    this.setState({entry:obj});
+    let _entry = Object.assign( this.state.entry );
+
+    _entry[e.target.id] = e.target.value;//state的key对应id的值
+
+    this.setState({entry:_entry});
   }
   _add(e){
     //新增一条数据
-    for(let key in this.state.entry){
-      if(this.state.entry[key]==""){
+
+    let _entry = Object.assign( this.state.entry );
+
+    _entry.id = Date.parse(new Date());
+
+    for(let key in _entry){
+      if( _entry[key] == "" ){
         alert("请输入完整的联系人信息");
         return false;
       };
     }
+
     let newArr = [
       ...this.state.history,
-      this.state.entry
+      _entry
     ]
     //保存数据,设置state
     this.updateHistory(newArr);
