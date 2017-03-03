@@ -4,7 +4,7 @@ import TabPanle from './TabPanle';
 import ChinaFlag from '../cssIcon/ChinaFlag';
 // import img_head from 'srcPath/img/lg.jpg';//http://up.qqjia.com/z/18/tu20468_3.jpg
 
-require('srcPath/sass/page/_PersonalProfile.scss');
+require('./style/_PersonalProfile.scss');
 
 class PersonalProfile extends React.Component {
 

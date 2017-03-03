@@ -1,4 +1,4 @@
-@import '../base/_fn';
+@import '~srcPath/sass/base/_fn';
 
 $offsetLeft: _(40);
 $borderColor: #5e5e5f;
@@ -175,6 +175,7 @@ img{
             text-decoration: underline;
             font-size: 1.1em;
             text-decoration: 1px;
+            margin-left: 1em;
         }
     }
     .arrow--top{
