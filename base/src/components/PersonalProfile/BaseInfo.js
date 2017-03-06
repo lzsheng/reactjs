@@ -1,10 +1,11 @@
 import React from 'react';
+import img_head from 'srcPath/img/lg.jpg';
 
 const BaseInfo = (props) => {
     return (
     <div className="baseInfo">
       <div className="leftBox">
-        <img src={"http://up.qqjia.com/z/18/tu20468_3.jpg"} alt="loading..."/>
+        <img src={img_head} alt="loading..."/>
         <div className="personalName">梁振盛</div>
       </div>
       <div className="rightBox">

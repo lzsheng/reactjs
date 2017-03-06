@@ -250,7 +250,7 @@ class TabPanle_4 extends React.Component {
               </div>
               <div className="TabPanle_content_title">项目描述：</div>
               <div className="TabPanle_content_text">
-                <div>该项目的数据来源于百度糯米，涉及的功能包括商品下单、根据地理位置查询店铺及商品、糯米号查询、订单查询、用户注册登陆等</div>
+                <div>该项目的数据来源于百度糯米，涉及的功能包括商品下单、根据地理位置查询店铺及商品、微信支付、订单查询、用户注册登陆等</div>
               </div>
               <div className="TabPanle_content_title">应用技术：</div>
               <div className="TabPanle_content_text">
@@ -386,7 +386,7 @@ class TabPanle_4 extends React.Component {
             <div className="TabPanle_content">
               <div className="TabPanle_content_title">项目时间：</div>
               <div className="TabPanle_content_text">
-                <div>2014-8 至 2015-1</div>
+                <div>2014-7 至 2015-1</div>
               </div>
               <div className="TabPanle_content_title">项目描述：</div>
               <div className="TabPanle_content_text">
