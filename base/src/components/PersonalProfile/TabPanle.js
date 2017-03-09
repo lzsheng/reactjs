@@ -6,10 +6,10 @@ const TabButton = (props) => {
     //     /personal/:tabId
     return (
     <div className="tabButton-box">
-      <IndexLink to={{pathname:'/personal/tab1',query:{} }} activeClassName="tabActive">个人简介</IndexLink>
-      <Link to={{pathname:'/personal/tab2',query:{} }} activeClassName="tabActive">技术能力</Link>
-      <Link to={{pathname:'/personal/tab3',query:{} }} activeClassName="tabActive">作品展示</Link>
-      <Link to={{pathname:'/personal/tab4',query:{} }} activeClassName="tabActive">项目经验</Link>
+      <IndexLink to={{pathname:'/tab1',query:{} }} activeClassName="tabActive">个人简介</IndexLink>
+      <Link to={{pathname:'/tab2',query:{} }} activeClassName="tabActive">技术能力</Link>
+      <Link to={{pathname:'/tab3',query:{} }} activeClassName="tabActive">作品展示</Link>
+      <Link to={{pathname:'/tab4',query:{} }} activeClassName="tabActive">项目经验</Link>
     </div>
     )
 };
@@ -20,8 +20,9 @@ const TabPanle_1 = (props) => {
       <div className="TabPanle_content">
         <div className="TabPanle_content_title">自我评价</div>
         <div className="TabPanle_content_text">
-          <div>我对web前端技术有着很高的热情，工作之余，我会在掘金，w3ctech，w3cfuns，慕课网和极客学院等网站学习更新、更全面的前端技术。</div>
-          <div className="freeLine">对前端组件化开发、javascript模块化（AMD）、基于微信的H5应用开发、移动端响应式布局和页面性能优化等有一定的实践经验。目前，我会使用的前端技术包含ES6,react.js,require.js,sass,gulp,webpack,jquery等。</div>
+          <div className="freeLine">本人对前端组件化开发、javascript模块化（AMD）、基于微信的H5应用开发、移动端响应式布局、页面性能优化、基于chrome调试和常见的浏览器问题等有一定的实践经验。目前，我会使用的前端技术／框架包括ES6,react.js,vue.js,require.js,sass,gulp,webpack,jquery等。</div>
+          <div className="freeLine">本人对web前端技术有着很高的热情，工作之余，我会在掘金，w3ctech，w3cfuns，慕课网和极客学院等网站学习更新、更全面的前端技术。 </div>
+          <div className="freeLine">目前正在钻研react.js全家桶和ES6 </div>
         </div>
       </div>
       <div className="TabPanle_content">

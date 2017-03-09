@@ -15,8 +15,8 @@ window.addEventListener('load',()=>{
 
 ReactDOM.render(
   <Router history={hashHistory}>
-    <Route path="/personal" component={PersonalProfile} >
-      <Route path=":tabId" component={TabPanle} />
+    <Route path="/" component={PersonalProfile}>
+        <Route path=":tabId" component={TabPanle} />
     </Route>
   </Router>,
   document.getElementById('app'));
