@@ -114,7 +114,7 @@ img{
         padding: 0 _(20);
         border-radius: _(10);
         border:1px solid #535861;
-        background: linear-gradient(top , rgb(124, 124, 124) 2% , rgb(86, 91, 101) 51%);
+        background: linear-gradient(to top , rgb(124, 124, 124) 2% , rgb(86, 91, 101) 51%);
         box-shadow: _(3) _(3) _(5) #111;
         height: 90%;
         &.tabActive{
@@ -125,7 +125,7 @@ img{
             border-top-right-radius: _(10);
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
-            background: linear-gradient(top , rgb(35, 49, 57) 21% , rgb(18, 34, 44) 28%);
+            background: linear-gradient(to top , rgb(35, 49, 57) 21% , rgb(18, 34, 44) 28%);
             box-shadow: none;
             position: relative;
             height: 100%;

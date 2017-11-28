@@ -9,14 +9,14 @@ import TabPanle from './components/PersonalProfile/TabPanle';
 require('normalize.css/normalize.css');
 require('./sass/index.scss');
 
-window.addEventListener('load',()=>{
+window.addEventListener('load', () => {
   FastClick.attach(document.body);
 });
 
 ReactDOM.render(
   <Router history={hashHistory}>
     <Route path="/" component={PersonalProfile}>
-        <Route path=":tabId" component={TabPanle} />
+      <Route path=":tabId" component={TabPanle} />
     </Route>
   </Router>,
   document.getElementById('app'));
