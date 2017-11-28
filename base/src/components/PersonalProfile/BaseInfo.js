@@ -1,5 +1,5 @@
 import React from 'react';
-import img_head from 'srcPath/img/lg.jpg';
+import img_head from 'srcPath/img/WechatIMG26.jpg';
 
 const BaseInfo = (props) => {
     return (
@@ -25,7 +25,7 @@ const BaseInfo = (props) => {
         <div className="rightBox-bottom">
           <div className="cell">
             <div className="cell-m">工作经验</div>
-            <div className="cell-r">30 months</div>
+            <div className="cell-r">40 months</div>
           </div>
           <div className="cell skill">
             <div className="cell-l">
