@@ -21,7 +21,7 @@ module.exports = {
     },
     output: {
         path: `${__dirname}/dist`,
-        filename: 'index.js?v=[hash]',
+        filename: 'index.[hash].js',
     },
     resolve: {
 

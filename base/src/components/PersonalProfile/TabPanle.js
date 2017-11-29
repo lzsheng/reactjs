@@ -155,6 +155,17 @@ const TabPanle_3 = (props) => {
   return (
     <div>
       <div className="TabPanle_content">
+        <div className="TabPanle_content_title">乐心运动-积分商城</div>
+        <div className="TabPanle_content_text">
+          <div>
+            运行在乐心运动APP的H5积分商城，使用webpack + react.js + stylus构建项目，组件化，各个业务模块按需异步加载，减少用户首屏加载资源的时间。
+          </div>
+
+          <div className="demoLink"><a href="http://a.app.qq.com/o/simple.jsp?pkgname=gz.lifesense.weidong" target="_blank">详情见：乐心运动APP > 发现 > 积分商城</a></div>
+        </div>
+      </div>
+
+      <div className="TabPanle_content">
         <div className="TabPanle_content_title">require.js + sui mobile + gulp + sass 集成框架</div>
         <div className="TabPanle_content_text">
           <div>
@@ -163,6 +174,28 @@ const TabPanle_3 = (props) => {
 
           <div className="demoLink"><a href="https://lzsheng.github.io/funs/life/webapp/develop/www/base/index/index.html" target="_blank">商城完整demo</a></div>
           <div className="demoLink"><a href="https://lzsheng.github.io/funs/build/www/base/home/home.html" target="_blank">极简demo</a></div>
+        </div>
+      </div>
+
+      <div className="TabPanle_content">
+        <div className="TabPanle_content_title">中国省市区选择控件</div>
+        <div className="TabPanle_content_text">
+          <div>
+            基于 react.js + swiper.js 的中国省市区选择控件。
+        </div>
+
+          <div className="demoLink"><a href="https://lzsheng.github.io/react-ChinaAreaSelector/dist/ChinaAreaSelector/#/mobile" target="_blank">移动版</a></div>
+          <div className="demoLink"><a href="https://lzsheng.github.io/react-ChinaAreaSelector/dist/ChinaAreaSelector/#/pc" target="_blank">PC版</a></div>
+          <div className="demoLink"><a href="https://github.com/lzsheng/react-ChinaAreaSelector" target="_blank">github仓库</a></div>
+        </div>
+      </div>
+
+      <div className="TabPanle_content">
+        <div className="TabPanle_content_title">react-form组件</div>
+        <div className="TabPanle_content_text">
+          <div>基于react.js，使用高阶组件包装的form表单组件，不需手动绑定onchange和state，不需手动更新状态，提高开发体验</div>
+          <div className="demoLink"><a href="https://lzsheng.github.io/react-form/dist/reactForm/#/" target="_blank">传送门</a></div>
+          <div className="demoLink"><a href="https://github.com/lzsheng/react-form" target="_blank">github仓库</a></div>
         </div>
       </div>
 
@@ -219,6 +252,7 @@ class TabPanle_4 extends React.Component {
   render() {
     return (
       <div>
+
         <Accordion title={`乐心运动-内嵌 H5页面(积分商场等)`}>
           <div className="TabPanle_content">
             <div className="TabPanle_content_title">项目时间：</div>
@@ -242,6 +276,7 @@ class TabPanle_4 extends React.Component {
             </div>
           </div>
         </Accordion>
+
         <Accordion title={`乐心运动-运营活动`}>
           <div className="TabPanle_content">
             <div className="TabPanle_content_title">项目时间：</div>
@@ -459,10 +494,12 @@ class TabPanle_4 extends React.Component {
 class TabPanle extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props)
     this.state = {
-
     }
   }
+
+
 
   render() {
 
