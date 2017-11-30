@@ -253,7 +253,7 @@ class TabPanle_4 extends React.Component {
     return (
       <div>
 
-        <Accordion title={`乐心运动-内嵌 H5页面(积分商场等)`}>
+        <Accordion title={`乐心运动-内嵌 H5页面(积分商城等)`}>
           <div className="TabPanle_content">
             <div className="TabPanle_content_title">项目时间：</div>
             <div className="TabPanle_content_text">
@@ -261,7 +261,7 @@ class TabPanle_4 extends React.Component {
             </div>
             <div className="TabPanle_content_title">项目描述：</div>
             <div className="TabPanle_content_text">
-              <div>该项目为乐心运动 APP 内嵌的 H5页面，包括 发现、群组、我的积分、积分商场等模块</div>
+              <div>该项目为乐心运动 APP 内嵌的 H5页面，包括 发现、群组、我的积分、积分商城等模块</div>
             </div>
             <div className="TabPanle_content_title">应用技术：</div>
             <div className="TabPanle_content_text">
