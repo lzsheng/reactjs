@@ -38,19 +38,13 @@ const TabPanle_1 = (props) => {
         <div className="TabPanle_content_text">
           <div className="cell">
             <div className="cell-m">广东乐心医疗电子股份有限公司</div>
-            <div className="cell-r">2017年04月 - 2017年11月</div>
+            <div className="cell-r">2017年04月 - 2017年12月</div>
           </div>
         </div>
         <div className="TabPanle_content_text">
           <div className="cell">
             <div className="cell-m">广州广电运通信息科技有限公司</div>
-            <div className="cell-r">2015年06月 - 2017年04月</div>
-          </div>
-        </div>
-        <div className="TabPanle_content_text">
-          <div className="cell">
-            <div className="cell-m">广东国笔科技股份有限公司</div>
-            <div className="cell-r">2014年07月 - 2015年06月</div>
+            <div className="cell-r">2014年07月 - 2017年04月</div>
           </div>
         </div>
       </div>
@@ -65,6 +59,12 @@ const TabPanle_1 = (props) => {
         <div className="TabPanle_content_title">语言能力</div>
         <div className="TabPanle_content_text">
           <div>普通话、粤语</div>
+        </div>
+      </div>
+      <div className="TabPanle_content">
+        <div className="TabPanle_content_title">兴趣爱好</div>
+        <div className="TabPanle_content_text">
+          <div>足球</div>
         </div>
       </div>
     </div>
@@ -102,7 +102,7 @@ const TabPanle_2 = (props) => {
         <div className="TabPanle_content_title">技术、框架</div>
         <div className="TabPanle_content_text">
           <div className="cell">
-            <div className="cell-m">react.js（react-router、es6、webpack、hot-loader）</div>
+            <div className="cell-m">react.js（react-router、redux、es6、webpack）</div>
             <div className="cell-r">擅长</div>
           </div>
           <div className="cell">
@@ -154,6 +154,17 @@ const TabPanle_2 = (props) => {
 const TabPanle_3 = (props) => {
   return (
     <div>
+      <div className="TabPanle_content">
+        <div className="TabPanle_content_title">时光网(仿)</div>
+        <div className="TabPanle_content_text">
+          <div>
+            仿照时光网的项目，使用webpack + react.js + redux + stylus + node.js + mongodb 构建项目，各个业务模块按需异步加载。
+          </div>
+
+          <div className="demoLink"><a href="https://www.umoai.com/static/web/#/index" target="_blank">传送门</a></div>
+        </div>
+      </div>
+
       <div className="TabPanle_content">
         <div className="TabPanle_content_title">乐心运动-积分商城</div>
         <div className="TabPanle_content_text">
@@ -420,7 +431,7 @@ class TabPanle_4 extends React.Component {
           <div className="TabPanle_content">
             <div className="TabPanle_content_title">项目时间：</div>
             <div className="TabPanle_content_text">
-              <div>2015-11 至 2016-01</div>
+              <div>2015-8 至 2016-01</div>
             </div>
             <div className="TabPanle_content_title">项目描述：</div>
             <div className="TabPanle_content_text">
@@ -428,7 +439,7 @@ class TabPanle_4 extends React.Component {
             </div>
             <div className="TabPanle_content_title">应用技术：</div>
             <div className="TabPanle_content_text">
-              <div>jquery.js + jquery ui + sass</div>
+              <div>jquery.js + jquery mobile + sass</div>
             </div>
             <div className="TabPanle_content_title">项目职责：</div>
             <div className="TabPanle_content_text">
@@ -443,7 +454,7 @@ class TabPanle_4 extends React.Component {
           <div className="TabPanle_content">
             <div className="TabPanle_content_title">项目时间：</div>
             <div className="TabPanle_content_text">
-              <div>2015-6 至 2015-11</div>
+              <div>2014-8 至 2015-11</div>
             </div>
             <div className="TabPanle_content_title">项目描述：</div>
             <div className="TabPanle_content_text">
@@ -463,29 +474,6 @@ class TabPanle_4 extends React.Component {
             </div>
           </div>
         </Accordion>
-        <Accordion title={`问果商城（移动端 + PC端）`}>
-          <div className="TabPanle_content">
-            <div className="TabPanle_content_title">项目时间：</div>
-            <div className="TabPanle_content_text">
-              <div>2014-7 至 2015-6</div>
-            </div>
-            <div className="TabPanle_content_title">项目描述：</div>
-            <div className="TabPanle_content_text">
-              <div>集成B2B,O2O多重商业模式的电子商城项目，有PC端和移动端的商城</div>
-            </div>
-            <div className="TabPanle_content_title">应用技术：</div>
-            <div className="TabPanle_content_text">
-              <div>zepto.js + sea.js + GMU UI</div>
-            </div>
-            <div className="TabPanle_content_title">项目职责：</div>
-            <div className="TabPanle_content_text">
-              <div>1.修复因浏览器版本不同而引起的兼容性问题，修复已知bug</div>
-              <div>2.按新需求编写与添加JS模块组件（基于sea.js模块化js）</div>
-              <div>3.静态页面的制作，根据PSD文件制作静态页面(HTML、CSS、JS) </div>
-              <div>4.使用ajax与后台开发对接数据</div>
-            </div>
-          </div>
-        </Accordion>
       </div>
     )
   }
@@ -498,9 +486,6 @@ class TabPanle extends React.Component {
     this.state = {
     }
   }
-
-
-
   render() {
 
     let showPanle = null;
